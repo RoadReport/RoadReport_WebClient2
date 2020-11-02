@@ -45,42 +45,25 @@ import { db } from "../firestore";
 
 export default {
   name: "RoadEvent",
-  data() {
-    return {
-      messages: [],
-      importantLinks: [],
-    };
-  },
-  mounted: function() {
-    this.$bind(
-      "messages",
-      db
-        .collection("ReportAccident")
-        .doc("0")
-        .collection("accidents")
-        .orderBy("time")
-    );
-  },
-  // data: () => ({
-  //   districts: [],
-  //   importantLinks: [
-  //     {
-  //       text: "Documentation",
-  //       href: "https://vuetifyjs.com",
-  //       imageUrl: "https://i.imgur.com/9hemARl.jpg"
-  //     },
-  //     {
-  //       text: "Articles",
-  //       href: "https://medium.com/vuetify",
-  //       imageUrl: "https://i.imgur.com/O5cxATL.jpg"
-  //     },
-  //   ],
-  // }),
 
-  // firestore() {
-  //   return {
-  //     districts: db.collection('districts').orderBy('name')
-  //   }
-  // }
+  data: () => ({
+    messages: [],
+    importantLinks: [
+      {
+        text: "Documentation",
+        href: "https://vuetifyjs.com",
+        imageUrl: "https://i.imgur.com/9hemARl.jpg",
+      },
+      {
+        text: "Articles",
+        href: "https://medium.com/vuetify",
+        imageUrl: "https://i.imgur.com/O5cxATL.jpg",
+      },
+    ],
+  }),
+
+  firestore: {
+    messages: db.collection("ReportAccident").doc("0").collection("accidents").orderBy("time"),
+  },
 };
 </script>
