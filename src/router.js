@@ -5,11 +5,14 @@ import Router from "vue-router";
 import defaultLayout from "@/layout/default";
 import emptyLayout from "@/layout/empty";
 
-import RoadSelect from "@/pages/RoadSelect";
-import RoadEvent from "@/pages/RoadEvent";
-import Weather from "@/pages/Weather";
+import About from "@/pages/About";
+import Announcement from "@/pages/Announcement";
 import LiveCam from "@/pages/LiveCam";
 import Login from "@/pages/Login";
+import RoadEvent from "@/pages/RoadEvent";
+import RoadSelect from "@/pages/RoadSelect";
+import Settings from "@/pages/Settings";
+import Weather from "@/pages/Weather";
 
 Vue.use(Router);
 
@@ -23,6 +26,16 @@ export default new Router({
       redirect: "/roadselect",
       children: [
         {
+          path: "/about",
+          name: "About",
+          component: About,
+        },
+        {
+          path: "/announcement",
+          name: "Announcement",
+          component: Announcement,
+        },
+        {
           path: "/roadselect",
           name: "RoadSelect",
           component: RoadSelect,
@@ -31,6 +44,11 @@ export default new Router({
           path: "/roadevent",
           name: "RoadEvent",
           component: RoadEvent,
+        },
+        {
+          path: "/settings",
+          name: "Settings",
+          component: Settings,
         },
         {
           path: "/weather",
