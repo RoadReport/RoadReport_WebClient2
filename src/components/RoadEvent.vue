@@ -9,7 +9,7 @@
           v-for="(link, i) in importantLinks"
           :key="i"
         >
-        <img :src="link.imageUrl">
+        <v-img :src="link.imageUrl" max-width="480"> </v-img>
           <div class="text--primary">
             {{ link.text }}
           </div>
