@@ -5,6 +5,7 @@ import app from "./App";
 
 import RoadEvent from "@/pages/RoadEvent";
 import Weather from "@/pages/Weather";
+import LiveCam from "@/pages/LiveCam";
 
 Vue.use(Router);
 
@@ -25,6 +26,11 @@ export default new Router({
       path: "/weather",
       name: "Weather",
       component: Weather,
+    },
+    {
+      path: "/livecam",
+      name: "LiveCam",
+      component: LiveCam,
     },
   ],
 });
