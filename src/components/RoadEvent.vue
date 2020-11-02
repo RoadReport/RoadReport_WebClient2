@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col class="mb-5" cols="12" v-for="(link, i) in messages" :key="i">
+      <v-col cols="12" v-for="(link, i) in messages" :key="i">
         <v-card elevation="2" class="mx-auto" max-width="480">
           <v-card-text>
             {{ link.situationType }}
@@ -12,11 +12,10 @@
             {{ link.situation }}
           </v-card-text>
 
-          <v-row align="center" justify="center">
+          <v-row dense align="center" justify="center">
             <v-img
-              class="text-center"
               :src="link.imageUrl"
-              max-width="420"
+              max-width="400"
             ></v-img>
           </v-row>
 

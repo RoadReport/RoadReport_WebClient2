@@ -7,7 +7,7 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
+          <v-list-item-title>未登入</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -82,6 +82,7 @@
 
     <v-main>
       <RoadEvent />
+      <router-view />
     </v-main>
   </v-app>
 </template>
