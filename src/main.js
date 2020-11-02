@@ -2,9 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import { firestorePlugin } from "vuefire";
-// import route from "./router"
-// import firebase from "firebase/app";
-// import "firebase/firestore";
+import router from "./router";
 
 Vue.use(firestorePlugin);
 
@@ -14,9 +12,16 @@ Vue.use(firestorePlugin);
 // Vue.use(VueRouter)
 
 Vue.config.productionTip = false;
- 
+
 new Vue({
-  // route,
+  el: "#app",
+  router,
+
+  components: {
+    App,
+  },
+
+  template: "<App/>",
   vuetify,
   render: (h) => h(App),
-}).$mount("#app");
+});

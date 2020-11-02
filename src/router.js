@@ -1,18 +1,30 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import Router from "vue-router";
 
-import app from "./app";
+import app from "./App";
 
-Vue.use(VueRouter);
+import RoadEvent from "@/pages/RoadEvent";
+import Weather from "@/pages/Weather";
 
-export default new VueRouter({
+Vue.use(Router);
+
+export default new Router({
   mode: "history",
   routes: [
     {
       path: "/",
       name: "root",
       component: app,
-      redirect: "/home",
+    },
+    {
+      path: "/roadevent",
+      name: "RoadEvent",
+      component: RoadEvent,
+    },
+    {
+      path: "/weather",
+      name: "Weather",
+      component: Weather,
     },
   ],
 });

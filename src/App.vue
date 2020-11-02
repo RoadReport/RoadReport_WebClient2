@@ -14,7 +14,12 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.title" link>
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          :to="item.url"
+          link
+        >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -81,7 +86,7 @@
     </v-app-bar>
 
     <v-main>
-      <RoadEvent />
+      <!-- <RoadEvent /> -->
       <router-view />
     </v-main>
   </v-app>
@@ -89,13 +94,13 @@
 
 <script>
 // import HelloWorld from "./components/HelloWorld";
-import RoadEvent from "./components/RoadEvent";
+// import RoadEvent from "./components/RoadEvent";
 
 export default {
   name: "App",
 
   components: {
-    RoadEvent,
+    // RoadEvent,
   },
 
   data: () => ({
@@ -105,14 +110,17 @@ export default {
       {
         title: "路況",
         icon: "mdi-car-info",
+        url: "roadevent",
       },
       {
         title: "天氣",
         icon: "mdi-weather-cloudy",
+        url: "weather",
       },
       {
         title: "影像",
         icon: "mdi-camera",
+        url: "livecam",
       },
     ],
   }),
