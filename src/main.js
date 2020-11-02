@@ -14,7 +14,7 @@ Vue.use(firestorePlugin);
 // Vue.use(VueRouter)
 
 Vue.config.productionTip = false;
-
+ 
 new Vue({
   // route,
   vuetify,

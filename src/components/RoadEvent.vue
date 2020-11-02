@@ -1,40 +1,31 @@
 <template>
   <v-container>
-    <v-row class="text-center">
-      <v-col class="mb-5" cols="12">
-        <v-card
-          elevation="2"
-          class="mx-auto"
-          max-width="480"
-          v-for="(link, i) in messages"
-          :key="i"
-        >
-          <v-img :src="link.imageUrl" max-width="480"> </v-img>
-          <div class="text--primary">
-            {{ link.userUid }}
-          </div>
-          <div class="text--primary">
-            {{ link.locationText }}
-          </div>
+    <v-row>
+      <v-col class="mb-5" cols="12" v-for="(link, i) in messages" :key="i">
+        <v-card elevation="2" class="mx-auto" max-width="480">
+          <v-card-text>
+            {{ link.situationType }}
+            <span class="body-1 text--primary">{{ link.locationText }}</span>
+          </v-card-text>
+
+          <v-card-text class="body-1 text--primary">
+            {{ link.situation }}
+          </v-card-text>
+
+          <v-row align="center" justify="center">
+            <v-img
+              class="text-center"
+              :src="link.imageUrl"
+              max-width="420"
+            ></v-img>
+          </v-row>
+
+          <v-list-item class="grow">
+            <v-row align="center" justify="end">
+              <span class="subheading">{{ link.userName }}</span>
+            </v-row>
+          </v-list-item>
         </v-card>
-      </v-col>
-
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -63,7 +54,11 @@ export default {
   }),
 
   firestore: {
-    messages: db.collection("ReportAccident").doc("0").collection("accidents").orderBy("time"),
+    messages: db
+      .collection("ReportAccident")
+      .doc("0")
+      .collection("accidents")
+      .orderBy("time"),
   },
 };
 </script>
