@@ -39,18 +39,6 @@ export default {
 
   data: () => ({
     messages: [],
-    importantLinks: [
-      {
-        text: "Documentation",
-        href: "https://vuetifyjs.com",
-        imageUrl: "https://i.imgur.com/9hemARl.jpg",
-      },
-      {
-        text: "Articles",
-        href: "https://medium.com/vuetify",
-        imageUrl: "https://i.imgur.com/O5cxATL.jpg",
-      },
-    ],
   }),
 
   firestore: {

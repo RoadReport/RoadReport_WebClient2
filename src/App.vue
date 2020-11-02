@@ -51,14 +51,33 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-dialog v-model="dialog" width="500">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn text v-bind="attrs" v-on="on">
+            <span class="mr-2">切換道路</span>
+            <v-icon>mdi-open-in-new</v-icon>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-card-title class="headline lighten-2">
+            切換道路
+          </v-card-title>
+          <v-list nav dense>
+            <v-list-item-group color="primary">
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon>mdi-car-info</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>台 24</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
+      </v-dialog>
     </v-app-bar>
 
     <v-main>
@@ -80,10 +99,11 @@ export default {
 
   data: () => ({
     drawer: null,
+    dialog: false,
     items: [
       {
         title: "路況",
-        icon: 'mdi-car-info',
+        icon: "mdi-car-info",
       },
       {
         title: "天氣",
