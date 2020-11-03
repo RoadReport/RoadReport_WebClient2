@@ -1,5 +1,9 @@
 <template>
-  <h1>Settings</h1>
+<v-container>
+    <v-row class="justify-center" dense>
+      <h3>這一頁會有設定功能，只是還沒做。</h3>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

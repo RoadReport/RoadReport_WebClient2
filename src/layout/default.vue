@@ -112,7 +112,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn text v-bind="attrs" v-on="on">
               <span class="mr-2">切換道路</span>
-              <v-icon>mdi-open-in-new</v-icon>
+              <v-icon>mdi-compare-horizontal</v-icon>
             </v-btn>
           </template>
 
@@ -159,7 +159,7 @@ export default {
       },
       {
         title: "公告",
-        icon: "mdi-message-alert-outline",
+        icon: "mdi-bullhorn-outline",
         url: "/announcement",
       },
     ],

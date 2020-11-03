@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row dense>
       <v-col cols="12" v-for="(link, i) in messages" :key="i">
         <v-card elevation="2" class="mx-auto" max-width="480">
           <v-card-text>
