@@ -29,6 +29,9 @@ export default new Router({
           path: "/about",
           name: "About",
           component: About,
+          beforeEnter() {
+            location.href = "https://bit.ly/RoadRAbout"
+          }
         },
         {
           path: "/announcement",
