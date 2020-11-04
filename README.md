@@ -34,5 +34,6 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-## Vue Lifecycle 參考文章
+## 參考文章，幹你 Javascript
+[從ES6開始的JavaScript學習生活](https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/)
 [Vue Instance](https://cythilya.github.io/2017/04/11/vue-instance/)

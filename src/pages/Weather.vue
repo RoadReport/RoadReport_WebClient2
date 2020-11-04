@@ -10,14 +10,16 @@
 export default {
   name: "Weather",
   data: () => ({}),
-  methods: {
-    checkLocalStorage: function() {
-      console.log("checking");
-    },
-  },
-  beforeCreate: function() {
-    console.log("fucking");
-    this.checkLocalStorage;
+  methods: {},
+  mounted() {
+    if (localStorage.getItem("RoadCode") == null) {
+      console.log("You fucking donkey!");
+      this.$router.push("roadselect");
+      console.log(
+        "%c ",
+        "font-size:800px; background:url(https://i.pinimg.com/originals/ad/fa/0c/adfa0c865a9312afea03150e1fb1cfbd.gif) no-repeat;"
+      );
+    }
   },
 };
 </script>
