@@ -24,9 +24,7 @@ new Vue({
   components: {
     App,
   },
-  beforeCreate() {
-    this.$store.commit("initialiseStore");
-  },
+  beforeCreate() {},
 
   template: "<App/>",
   vuetify,
