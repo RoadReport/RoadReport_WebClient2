@@ -13,10 +13,7 @@
           </v-card-text>
 
           <v-row dense align="center" justify="center">
-            <v-img
-              :src="link.imageUrl"
-              max-width="400"
-            ></v-img>
+            <v-img :src="link.imageUrl" max-width="400"></v-img>
           </v-row>
 
           <v-list-item class="grow">
@@ -35,6 +32,8 @@ import { db } from "../firestore";
 
 export default {
   name: "RoadEvent",
+
+  beforeCreate: {},
 
   data: () => ({
     messages: [],

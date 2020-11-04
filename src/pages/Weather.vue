@@ -9,5 +9,15 @@
 <script>
 export default {
   name: "Weather",
+  data: () => ({}),
+  methods: {
+    checkLocalStorage: function() {
+      console.log("checking");
+    },
+  },
+  beforeCreate: function() {
+    console.log("fucking");
+    this.checkLocalStorage;
+  },
 };
 </script>
