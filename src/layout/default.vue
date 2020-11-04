@@ -84,8 +84,7 @@
       </v-navigation-drawer>
 
       <v-app-bar app color="primary" dark>
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>道路名稱</v-toolbar-title>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>        
         <div class="d-flex align-center">
           <v-img
             alt="Vuetify Logo"
@@ -96,16 +95,16 @@
             width="40"
           />
 
-          <v-img
+          <!-- <v-img
             alt="Vuetify Name"
             class="shrink mt-1 hidden-sm-and-down"
             contain
             min-width="100"
             src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
             width="100"
-          />
+          /> -->
         </div>
-
+        <v-toolbar-title>看路</v-toolbar-title>
         <v-spacer />
 
         <v-dialog v-model="dialog" width="500">
@@ -131,6 +130,17 @@
                     <v-list-item-title>台 24</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
+
+                 <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>mdi-car-info</v-icon>
+                  </v-list-item-icon>
+
+                  <v-list-item-content>
+                    <v-list-item-title>182縣道</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+
               </v-list-item-group>
             </v-list>
           </v-card>
