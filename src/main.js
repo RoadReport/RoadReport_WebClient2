@@ -1,9 +1,12 @@
 import Vue from "vue";
 import App from "./App.vue";
+import store from "./store";
+// import VueCookies from "vue-cookies";
 import vuetify from "./plugins/vuetify";
 import { firestorePlugin } from "vuefire";
 import router from "./router";
 
+// Vue.use(VueCookies);
 Vue.use(firestorePlugin);
 
 // 1. Use plugin.
@@ -16,9 +19,13 @@ Vue.config.productionTip = false;
 new Vue({
   el: "#app",
   router,
+  store,
 
   components: {
     App,
+  },
+  beforeCreate() {
+    this.$store.commit("initialiseStore");
   },
 
   template: "<App/>",
