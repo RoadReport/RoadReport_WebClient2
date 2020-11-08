@@ -35,6 +35,7 @@ export default {
   data: () => ({
     messages: [],
   }),
+  methods: {},
   beforeCreate() {
     if (localStorage.getItem("RoadCode") == null) {
       this.$router.push("roadselect");
@@ -45,7 +46,6 @@ export default {
       );
     }
   },
-  methods: {},
   firestore() {
     let roadcode = localStorage.getItem("RoadCode");
     return {

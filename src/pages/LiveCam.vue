@@ -11,7 +11,7 @@ export default {
   name: "LiveCam",
   data: () => ({}),
   methods: {},
-  mounted() {
+  beforeCreate() {
     if (localStorage.getItem("RoadCode") == null) {
       console.log("You fucking donkey!");
       this.$router.push("roadselect");
