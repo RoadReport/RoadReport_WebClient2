@@ -8,6 +8,7 @@
           :color="item.color"
           @click="selectRoad(item.roadcode)"
           link
+          dark
         >
           <div class="d-flex flex-no-wrap justify-space-between align-center">
             <div>
@@ -15,8 +16,8 @@
               <v-card-subtitle v-text="item.artist"></v-card-subtitle>
             </div>
 
-            <v-avatar class="ma-3" size="100" tile>
-              <v-img :src="item.src" />
+            <v-avatar class="ma-3" size="96" tile>
+              <v-img :src="item.src"/>
             </v-avatar>
           </div>
         </v-card>
