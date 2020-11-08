@@ -50,6 +50,7 @@ export default {
   methods: {
     selectRoad(roadcode) {
       localStorage.setItem("RoadCode", roadcode);
+      // this.$router.push("roadevent");
     },
   },
 };
