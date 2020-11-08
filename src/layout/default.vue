@@ -90,7 +90,7 @@
             alt="Vuetify Logo"
             class="shrink mr-2"
             contain
-            src="../assets/bollard_FCC308_64.svg"
+            src="../assets/bollard_forRound.png"
             transition="scale-transition"
             width="40"
           />
