@@ -7,4 +7,15 @@ module.exports = {
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
   },
+  devServer: {
+    proxy: {
+      "/weatherApi": {
+        target: "https://opendata.cwb.gov.tw/api/v1/rest/datastore",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/weatherApi": "",
+        },
+      },
+    },
+  },
 };
