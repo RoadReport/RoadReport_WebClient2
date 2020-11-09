@@ -50,10 +50,9 @@
 </template>
 
 <script>
-// import { weatherApi } from "@/service/WeatherApiService";
+import { getWeatherTemp } from "@/service/WeatherApiService";
 
 export default {
-  src: "../service/Weather.js",
   name: "Weather",
   data: () => ({
     weatherInfo: [],
