@@ -8,8 +8,8 @@
             <v-col cols="3">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title class="title font-weight-regular">
-                    地點
+                  <v-list-item-title class="title font-weight-regular"> 
+                    {{city}}地點
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     C0R150
@@ -52,12 +52,34 @@
 <script>
 // import { weatherApi } from "@/service/WeatherApiService";
 
-export default {
+export default {src:"../service/Weather.js",
   name: "Weather",
   data: () => ({
     weatherInfo: [],
+    city:'',
   }),
-  methods: {},
+  methods: {
+  getWeather() {
+    this.$axios
+        .get(
+          "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0001-001?Authorization=CWB-5E768A58-42AC-42E6-AE2F-078BE496737A&format=JSON&elementName=TEMP"
+        )
+        .then(res => {
+          return res.json();
+        }).then(data => {
+         // let datas = res.data.data[0];//下标为0即表示当天天气数据
+          this.Weather.data.city = data.records.location[0].locationName;
+          this.weatherInfo = data.records.location[0].locationName;
+          this.Weather.city = 'asd';
+          console.log(data);        
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+  }
+
+  },
   beforeCreate() {
     if (localStorage.getItem("RoadCode") == null) {
       console.log("You fucking donkey!");
@@ -78,5 +100,7 @@ export default {
   //       .orderBy("time"),
   //   };
   // },
+
 };
+
 </script>
