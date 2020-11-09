@@ -9,7 +9,7 @@
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
-                    {{ city }}地點
+                    地點
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     C0R150
@@ -68,10 +68,9 @@ export default {
           return res.json();
         })
         .then((data) => {
-          // let datas = res.data.data[0];//下标为0即表示当天天气数据
           this.Weather.data.city = data.records.location[0].locationName;
           this.weatherInfo = data.records.location[0].locationName;
-          this.Weather.city = "asd";
+          this.city = "asd";
           console.log(data);
         })
         .catch((err) => {
@@ -89,15 +88,14 @@ export default {
       );
     }
   },
-  // firestore() {
-  //   let roadcode = localStorage.getItem("RoadCode");
-  //   return {
-  //     messages: weatherApi
-  //       .collection("ReportAccident")
-  //       .doc(roadcode)
-  //       .collection("accidents")
-  //       .orderBy("time"),
-  //   };
-  // },
+  mounted() {
+    getWeatherTemp.then((data) => {
+      // console.log(data.records.location[0].locationName);
+      // console.log(data.records.location[0].stationId);
+      // console.log(data.records.location[0].weatherElement[0].elementName);
+      // console.log(data.records.location[0].weatherElement[0].elementValue);
+      this.weatherInfo = data;
+    });
+  },
 };
 </script>
