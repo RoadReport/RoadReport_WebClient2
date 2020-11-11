@@ -56,7 +56,7 @@ export default {
   name: "Weather",
   data: () => ({
     weatherInfo: [],
-    city: "",
+    city: '',
   }),
   methods: {
     getWeather() {

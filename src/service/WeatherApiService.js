@@ -26,6 +26,7 @@ export const getWeatherTemp = fetch(
     console.log(response.status);
     console.log(response.data);
     console.log(response.data.records.location[0].locationName);
+    this.city = response.data.records.location[0].locationName;
     console.log("aaa");
   })
   .catch(function(error) {
