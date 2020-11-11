@@ -12,17 +12,14 @@ export const getWeatherTemp = axios({
     stationId: "C0R150",
   },
 })
-  .then((response) => {
+  .then(function(response) {
     // Success
     console.log("Opendata status: " + response.status);
     console.log(response.data);
 
-    response.data;
+    return response.data;
   })
   .catch(function(error) {
     // Error
     console.log(error);
   })
-  .then(function() {
-    console.log("always executed");
-  });

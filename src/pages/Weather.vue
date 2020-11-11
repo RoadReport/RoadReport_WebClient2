@@ -1,18 +1,18 @@
 <template>
   <v-container>
     <v-row dense>
-      <!-- <v-col cols="12" v-for="(weatherInfo, i) in weatherInfo" :key="i"> -->
-      <v-col cols="12">
+       <v-col cols="12" v-for="(item, key, index) in weatherInfo" :key="item.stationId">
+<!--      <v-col cols="12">-->
         <v-card elevation="2" class="mx-auto" max-width="480">
           <v-row>
             <v-col cols="3">
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
-                    地點{{ city }}
+                    {{ item[0].locationName }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
-                    C0R150
+                    {{ item[0].stationId }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -22,7 +22,7 @@
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
-                    21
+                    {{ item[0].weatherElement[index].elementValue }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     目前溫度
@@ -89,12 +89,15 @@ export default {
     }
   },
   mounted() {
-    getWeatherTemp.then((data) => {
-      // console.log(data.records.location[0].locationName);
-      // console.log(data.records.location[0].stationId);
-      // console.log(data.records.location[0].weatherElement[0].elementName);
-      // console.log(data.records.location[0].weatherElement[0].elementValue);
-      this.weatherInfo = data;
+    getWeatherTemp.then((response) => {
+      let temp = response.records.location[0];
+      console.log(temp.locationName + temp.stationId + temp.weatherElement[0].elementName + temp.weatherElement[0].elementValue);
+
+      this.weatherInfo = response.records;
+
+      let parsedObj = JSON.parse(JSON.stringify(this.weatherInfo));
+      console.log("parsedObj will be:");
+      console.log(parsedObj.location[0].locationName);
     });
   },
 };
