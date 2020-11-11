@@ -9,7 +9,7 @@
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
-                    地點{{city}}
+                    地點{{ city }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     C0R150
@@ -56,7 +56,7 @@ export default {
   name: "Weather",
   data: () => ({
     weatherInfo: [],
-    city: '',
+    city: "",
   }),
   methods: {
     getWeather() {
