@@ -10,7 +10,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/weatherApi": {
-        target: "https://opendata.cwb.gov.tw/api/v1/rest/datastore",
+        target: "https://cors-anywhere.herokuapp.com/https://opendata.cwb.gov.tw/api/v1/rest/datastore",
         changeOrigin: true,
         pathRewrite: {
           "^/weatherApi": "",

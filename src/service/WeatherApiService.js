@@ -4,7 +4,7 @@ const axios = require("axios");
 
 export const getWeatherTemp = axios({
   method: "get",
-  url: "/weatherApi/O-A0001-001",
+  url: "https://cors-anywhere.herokuapp.com/https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0001-001",
   params: {
     Authorization: "CWB-5E768A58-42AC-42E6-AE2F-078BE496737A",
     format: "JSON",
