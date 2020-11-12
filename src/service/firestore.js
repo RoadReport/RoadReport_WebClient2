@@ -16,37 +16,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+export const firebaseGlobal = firebase;
 
 // Get a Firestore instance
 export const db = firebase.firestore();
-
-export const remoteConfig = firebase.remoteConfig();
-
-remoteConfig.settings = {
-  minimumFetchIntervalMillis: 3600000,
-};
-
-remoteConfig.ensureInitialized()
-  .then(() => {
-    console.log("Firebase Remote Config is initialized");
-  })
-  .catch((err) => {
-    console.error("Firebase Remote Config failed to initialize", err);
-  });
-
-remoteConfig.fetchAndActivate()
-  .then(() => {
-    console.log("fetchAndActivate Success!");
-    showMsg()
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
-remoteConfig.defaultConfig = {
-  "ANDROID_MIN_VER": "999",
-};
-
-function showMsg() {
-  console.log(remoteConfig.getValue("ANDROID_MIN_VER"));
-}

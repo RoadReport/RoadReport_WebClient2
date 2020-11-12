@@ -50,7 +50,8 @@
 </template>
 
 <script>
-import { getWeatherTemp } from "@/service/WeatherApiService";
+import {aTestFunctionFromWeatherApiService, getWeatherTemp} from "@/service/WeatherApiService";
+import {getWeatherInfo} from "@/service/WeatherApiService";
 
 export default {
   name: "Weather",
@@ -89,6 +90,8 @@ export default {
     }
   },
   mounted() {
+    aTestFunctionFromWeatherApiService();
+    getWeatherInfo("C0R150")
     getWeatherTemp.then((response) => {
       let temp = response.records.location[0];
       console.log(temp.locationName + temp.stationId + temp.weatherElement[0].elementName + temp.weatherElement[0].elementValue);
@@ -96,8 +99,7 @@ export default {
       this.weatherInfo = response.records;
 
       let parsedObj = JSON.parse(JSON.stringify(this.weatherInfo));
-      console.log("parsedObj will be:");
-      console.log(parsedObj.location[0].locationName);
+      console.log("parsedObj will be: " + parsedObj.location[0].locationName);
     });
   },
 };
