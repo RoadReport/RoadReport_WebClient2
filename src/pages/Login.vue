@@ -22,13 +22,7 @@
           </v-list-item>
         </v-col>
         <v-col cols="3">
-        <v-btn elevation="3" outlined x-large  >登入</v-btn>
-        <facebook-login class="button"
-              appId = "178598010098336"
-              @login="getUserData"
-              @logout="onLogout"
-              @get-initial-status="getUserData">
-        </facebook-login>
+        <v-btn elevation="3" outlined x-large @click="socialLongin">登入</v-btn>
         </v-col>
       </v-row>    
     </v-card-text>
@@ -36,47 +30,28 @@
 </template>
 
 <script>
-// import Vue from "vue";
-import facebookLogin from 'facebook-login-vuejs';
+
+import firebase from 'firebase';
 
 export default {
   name: "Login",
 
-  components: {
-    facebookLogin
-  },
+  methods: {
+    socialLongin() {
+      var provider = new firebase.auth.FacebookAuthProvider();
 
-  methods:
-  {
-    getUserData() {
-        this.FB.api('/me', 'GET', {fields: 'id,name,email'},
-          userInformation => {
-            console.warn('data api', userInformation)
-            this.personalID = userInformation.id;
-            this.email = userInformation.email;
-            this.name = userInformation.name;
-          }
-        )
-      },
+      firebase.auth().signInWithPopup(provider).then((result) => { // eslint-disable-line no-unused-vars
+      
+        this.router.replace('home');
 
-      sdkLoaded(payload) {
-        this.isConnected = payload.isConnected
-        this.FB = payload.FB
-        if (this.isConnected) this.getUserData()
-      },
+      }).catch((err) => {
+        
+        alert('Oops. ' + err.message)
 
-      onLogin() {
-        this.isConnected = true
-        this.getUserData()
-      },
+      });
 
-      onLogout() {
-        this.isConnected = false;
-      },
-
+    }
   }
-
-  
 
 };
 </script>
