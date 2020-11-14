@@ -6,8 +6,7 @@ const OPENDATA_AUTH =  "CWB-5E768A58-42AC-42E6-AE2F-078BE496737A";
 
 function getDynamicWeatherStationJson() {
   let data = fetchDynamicWeatherStation();
-  let list = JSON.parse(data._value);
-  return list;
+  return JSON.parse(data._value);
 }
 
 function fetchWeatherData(stationID) {
