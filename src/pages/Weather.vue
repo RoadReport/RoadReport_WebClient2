@@ -1,6 +1,14 @@
 <template>
   <v-container>
     <v-row dense>
+      <v-col class="text-center">
+        <v-progress-circular
+        class="justify-center"
+        v-if="!showProgress"
+        indeterminate
+        color="primary"
+        ></v-progress-circular>
+      </v-col>
       <v-col cols="12" v-for="(item, key) in weatherInfo" :key="key">
         <v-card elevation="2" class="mx-auto" max-width="480">
           <v-row>
@@ -58,6 +66,11 @@ export default {
     city: "",
   }),
   methods: {},
+  computed: {
+    showProgress() {
+      return this.weatherInfo.length > 0;
+    }
+  },
   beforeCreate() {
     if (localStorage.getItem("RoadCode") == null) {
       console.log("You fucking donkey!");
