@@ -46,15 +46,12 @@ export const fetchDynamicLiveCamSource = function () {
   let roadcode = localStorage.getItem("RoadCode");
   switch (parseInt(roadcode)) {
     case 0:
-      console.log("case 0 here")
       return remoteConfig.getValue("DLCS_24");
     case 1:
-      console.log("case 1 here")
       return remoteConfig.getValue("DLCS_182");
     case 2:
       return remoteConfig.getValue("DLCS_GRANDMA");
     default:
-      console.log("case default here")
       return remoteConfig.getValue("DLCS_24");
   }
 }
