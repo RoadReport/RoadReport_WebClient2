@@ -22,7 +22,7 @@
           </v-list-item>
         </v-col>
         <v-col cols="3">
-        <v-btn elevation="3" outlined x-large @click="socialLongin">登入</v-btn>
+        <v-btn elevation="3" outlined x-large @click="socialLogin">登入</v-btn>
         </v-col>
       </v-row>    
     </v-card-text>
@@ -37,7 +37,7 @@ export default {
   name: "Login",
 
   methods: {
-    socialLongin() {
+    socialLogin() {
       var provider = new firebase.auth.FacebookAuthProvider();
 
       firebase.auth().signInWithPopup(provider).then((result) => {     // eslint-disable-line no-unused-vars
