@@ -40,9 +40,11 @@ export default {
     socialLongin() {
       var provider = new firebase.auth.FacebookAuthProvider();
 
-      firebase.auth().signInWithPopup(provider).then((result) => { // eslint-disable-line no-unused-vars
+      firebase.auth().signInWithPopup(provider).then((result) => {     // eslint-disable-line no-unused-vars
       
         this.router.replace('home');
+        this.token = result.credential.accessToken;
+        this.user = result.user;
 
       }).catch((err) => {
         
