@@ -4,7 +4,7 @@
       <v-row align="center">
         <v-col cols="3">
           <v-img
-            src="https://randomuser.me/api/portraits/men/78.jpg"
+            :src="photoURL"
             alt="Sunny image"
             width="96"
           ></v-img>
@@ -13,17 +13,17 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="headline">
-                馬英九{{displayName}}
+                {{displayName}}
               </v-list-item-title>
               <v-list-item-subtitle class="subtitle-1">
-                horse@taiwan.com{{email}}
+                {{email}}
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-col>
         <v-col cols="3">
-        <v-btn elevation="3" outlined x-large @click="socialLogin">登入</v-btn>
-        <v-btn elevation="3" outlined x-large @click="signOut">登出</v-btn>
+        <v-btn elevation="3" outlined x-large @click="socialLogin" v-show="SignInShowButton">登入</v-btn>
+        <v-btn elevation="3" outlined x-large @click="signOut" v-show="SignOutShowButton">登出</v-btn>
         </v-col>
       </v-row>    
     </v-card-text>
@@ -38,6 +38,9 @@ export default {
   name: "Login",
 
   data:() => ({
+
+    SignInShowButton:1,
+    SignOutShowButton:0,
 
     photoURL:'',
     displayName:'',
@@ -55,20 +58,28 @@ export default {
         this.displayName = user.displayName;
         this.email = user.email;
 
+        console.log(user);
+
         console.log(user.photoURL);
         console.log(user.displayName);
         console.log(user.email);
 
+        this.SignInShowButton = 0;
+        this.SignOutShowButton = 1;
+
       } else {
         // User is signed out.   
 
-        this.photoURL = '';
-        this.displayName = '';
-        this.email = '';
-
+        this.photoURL = 'https://randomuser.me/api/portraits/men/78.jpg';
+        this.displayName = '馬英九(未登入)';
+        this.email = 'horse@taiwan.com(未登入)';
+        
         console.log('user.photoURL');
         console.log('user.displayName');
         console.log('user.email');
+
+        this.SignInShowButton = 1;
+        this.SignOutShowButton = 0;
 
       }
     })
