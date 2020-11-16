@@ -1,4 +1,4 @@
-import {firebaseGlobal} from "@/service/firestore";
+import {firebaseGlobal} from "@/service/FirebaseService";
 
 const remoteConfig = firebaseGlobal.remoteConfig()
 

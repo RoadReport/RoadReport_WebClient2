@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { db } from "@/service/firestore";
+import { db } from "@/service/FirebaseService";
 
 export default {
   name: "RoadEvent",
