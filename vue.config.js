@@ -2,8 +2,10 @@ module.exports = {
   transpileDependencies: ["vuetify"],
   pwa: {
     name: "看路",
-    themeColor: "#4DBA87",
-    msTileColor: "#000000",
+    short_name: "看路",
+    themeColor: "#ffffff",
+    msTileColor: "#ffffff",
+    backgroundColor: '#ffffff',
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
   },
