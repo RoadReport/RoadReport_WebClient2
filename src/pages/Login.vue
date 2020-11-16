@@ -13,10 +13,10 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="headline">
-                馬英九
+                馬英九{{displayName}}
               </v-list-item-title>
               <v-list-item-subtitle class="subtitle-1">
-                horse@taiwan.com
+                horse@taiwan.com{{email}}
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -37,11 +37,23 @@ import 'firebase/auth';
 export default {
   name: "Login",
 
+  data:() => ({
+
+    photoURL:'',
+    displayName:'',
+    email:'',
+
+  }),
+
   beforeCreate: function() {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
+
+        this.photoURL = user.photoURL;
+        this.displayName = user.displayName;
+        this.email = user.email;
 
         console.log(user.photoURL);
         console.log(user.displayName);
@@ -49,6 +61,11 @@ export default {
 
       } else {
         // User is signed out.   
+
+        this.photoURL = '';
+        this.displayName = '';
+        this.email = '';
+
         console.log('result.user.photoURL');
         console.log('result.user.displayName');
         console.log('result.user.email');
@@ -70,9 +87,9 @@ export default {
 
         console.log(result.user);
 
-        this.photoURL = result.user.photoURL;
-        this.displayName = result.user.displayName;
-        this.email = result.user.email;
+        // this.photoURL = result.user.photoURL;
+        // this.displayName = result.user.displayName;
+        // this.email = result.user.email;
 
         console.log(result.user.photoURL);
         console.log(result.user.displayName);
