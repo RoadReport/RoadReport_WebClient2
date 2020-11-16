@@ -66,9 +66,9 @@ export default {
         this.displayName = '';
         this.email = '';
 
-        console.log('result.user.photoURL');
-        console.log('result.user.displayName');
-        console.log('result.user.email');
+        console.log('user.photoURL');
+        console.log('user.displayName');
+        console.log('user.email');
 
       }
     })
@@ -80,20 +80,8 @@ export default {
       var provider = new firebase.auth.FacebookAuthProvider();
 
       firebase.auth().signInWithPopup(provider).then((result) => {     // eslint-disable-line no-unused-vars
-      
-        // this.$router.replace('Login');
-        this.token = result.credential.accessToken;
-        this.user = result.user;
 
-        console.log(result.user);
-
-        // this.photoURL = result.user.photoURL;
-        // this.displayName = result.user.displayName;
-        // this.email = result.user.email;
-
-        console.log(result.user.photoURL);
-        console.log(result.user.displayName);
-        console.log(result.user.email);
+        //beforeCreate
 
       }).catch((err) => {
         
