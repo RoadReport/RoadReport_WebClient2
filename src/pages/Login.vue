@@ -91,7 +91,8 @@ export default {
       var provider = new firebase.auth.FacebookAuthProvider();
 
       firebase.auth().signInWithPopup(provider).then((result) => {     // eslint-disable-line no-unused-vars
-
+        
+        this.$router.go(0);
         //beforeCreate
 
       }).catch((err) => {
