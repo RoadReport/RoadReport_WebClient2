@@ -5,9 +5,11 @@ module.exports = {
     short_name: "看路",
     themeColor: "#ffffff",
     msTileColor: "#ffffff",
-    backgroundColor: '#ffffff',
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
+    manifestOptions: {
+      background_color: "#ffffff"
+    }
   },
   devServer: {
     proxy: {
