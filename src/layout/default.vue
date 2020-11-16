@@ -5,14 +5,14 @@
         <v-list>
           <v-list-item>
             <v-list-item-avatar>
-              <v-img src="https://randomuser.me/api/portraits/men/78.jpg" />
+              <v-img :src="photoURL" />
             </v-list-item-avatar>
           </v-list-item>
 
           <v-list-item to="/login" link>
             <v-list-item-content>
-              <v-list-item-title class="title">未登入</v-list-item-title>
-              <v-list-item-subtitle>好平台，不登入嗎?</v-list-item-subtitle>
+              <v-list-item-title class="title">{{displayName}}</v-list-item-title>
+              <v-list-item-subtitle>{{email}}</v-list-item-subtitle>
             </v-list-item-content>
             <v-icon>mdi-chevron-right</v-icon>
           </v-list-item>
@@ -76,7 +76,7 @@
         </v-list>
         <template v-slot:append>
           <div class="pa-2">
-            <v-btn block>
+            <v-btn block @click="signOut">
               Logout
             </v-btn>
           </div>
@@ -155,6 +155,10 @@
   </v-app>
 </template>
 <script>
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 export default {
   name: "Default",
 
@@ -202,6 +206,53 @@ export default {
         url: "about",
       },
     ],
+
+    photoURL:'',
+    displayName:'',
+    email:'',
   }),
+
+beforeCreate: function() {
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+
+        this.photoURL = user.photoURL;
+        this.displayName = user.displayName;
+        this.email = user.email;
+
+        console.log(user);
+
+        console.log(user.photoURL);
+        console.log(user.displayName);
+        console.log(user.email);
+
+      } else {
+        // User is signed out.   
+
+        this.photoURL = 'https://randomuser.me/api/portraits/men/78.jpg';
+        this.displayName = '未登入';
+        this.email = '好平台，不登入嗎?';
+        
+        console.log('user.photoURL');
+        console.log('user.displayName');
+        console.log('user.email');
+
+ 
+
+      }
+    })
+
+  },
+  
+  methods: {
+    signOut() {
+
+      firebase.auth().signOut();
+
+    },
+
+  },
 };
 </script>
