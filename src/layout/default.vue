@@ -250,7 +250,7 @@ beforeCreate: function() {
     signOut() {
 
       firebase.auth().signOut();
-
+      this.$router.go(0);
     },
 
   },
