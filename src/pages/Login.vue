@@ -70,7 +70,7 @@ export default {
       } else {
         // User is signed out.   
 
-        this.photoURL = 'https://randomuser.me/api/portraits/men/78.jpg';
+        this.photoURL = 'https://www.flaticon.com/svg/static/icons/svg/14/14660.svg';
         this.displayName = '馬英九(未登入)';
         this.email = 'horse@taiwan.com(未登入)';
         

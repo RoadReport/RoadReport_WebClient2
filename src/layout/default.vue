@@ -231,7 +231,7 @@ beforeCreate: function() {
       } else {
         // User is signed out.   
 
-        this.photoURL = 'https://randomuser.me/api/portraits/men/78.jpg';
+        this.photoURL = 'https://www.flaticon.com/svg/static/icons/svg/14/14660.svg';
         this.displayName = '未登入';
         this.email = '好平台，不登入嗎?';
         
