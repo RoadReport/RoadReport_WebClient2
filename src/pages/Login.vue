@@ -11,7 +11,7 @@
         </v-list-item>
 
         <v-card-actions>
-          <v-btn elevation="3" color="primary" min-width="100%" @click="socialLogin" v-show="!isSignedIn">
+          <v-btn elevation="3" color="primary" block @click="socialLogin" v-show="!isSignedIn">
             註冊 / 登入
           </v-btn>
           <v-btn color="primary" outlined @click="signOut" v-show="isSignedIn">
