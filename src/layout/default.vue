@@ -77,7 +77,7 @@
         
       </v-navigation-drawer>
 
-      <v-app-bar app color="white" light>
+      <v-app-bar app class="mb-2" color="white" light>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <div class="d-flex align-center">
           <v-img
