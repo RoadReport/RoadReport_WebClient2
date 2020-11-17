@@ -5,14 +5,14 @@
         <v-list>
           <v-list-item>
             <v-list-item-avatar>
-              <v-img :src="photoURL" />
+              <v-img :src="photoURL"/>
             </v-list-item-avatar>
           </v-list-item>
 
           <v-list-item to="/login" link>
             <v-list-item-content>
-              <v-list-item-title class="title">{{displayName}}</v-list-item-title>
-              <v-list-item-subtitle>{{email}}</v-list-item-subtitle>
+              <v-list-item-title class="title">{{ displayName }}</v-list-item-title>
+              <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
             </v-list-item-content>
             <v-icon>mdi-chevron-right</v-icon>
           </v-list-item>
@@ -22,10 +22,10 @@
 
         <v-list dense nav>
           <v-list-item
-            v-for="item in section1"
-            :key="item.title"
-            :to="item.url"
-            link
+              v-for="item in section1"
+              :key="item.title"
+              :to="item.url"
+              link
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -41,10 +41,10 @@
 
         <v-list dense nav>
           <v-list-item
-            v-for="item in section2"
-            :key="item.title"
-            :to="item.url"
-            link
+              v-for="item in section2"
+              :key="item.title"
+              :to="item.url"
+              link
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -60,10 +60,10 @@
 
         <v-list dense nav>
           <v-list-item
-            v-for="item in section3"
-            :key="item.title"
-            :to="item.url"
-            link
+              v-for="item in section3"
+              :key="item.title"
+              :to="item.url"
+              link
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -74,35 +74,20 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <template v-slot:append>
-          <div class="pa-2">
-            <v-btn block @click="signOut">
-              Logout
-            </v-btn>
-          </div>
-        </template>
+        
       </v-navigation-drawer>
 
       <v-app-bar app color="white" light>
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>        
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <div class="d-flex align-center">
           <v-img
-            alt="Vuetify Logo"
-            class="shrink mr-2"
-            contain
-            src="../assets/bollard_forRound.png"
-            transition="scale-transition"
-            width="40"
+              alt="Vuetify Logo"
+              class="shrink mr-2"
+              contain
+              src="../assets/bollard_forRound.png"
+              transition="scale-transition"
+              width="40"
           />
-
-          <!-- <v-img
-            alt="Vuetify Name"
-            class="shrink mt-1 hidden-sm-and-down"
-            contain
-            min-width="100"
-            src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-            width="100"
-          /> -->
         </div>
         <v-toolbar-title>看路!</v-toolbar-title>
         <v-spacer />
@@ -131,7 +116,7 @@
                   </v-list-item-content>
                 </v-list-item>
 
-                 <v-list-item>
+                <v-list-item>
                   <v-list-item-icon>
                     <v-icon>mdi-car-info</v-icon>
                   </v-list-item-icon>
@@ -149,7 +134,7 @@
 
       <v-main>
         <!-- <RoadEvent /> -->
-        <router-view />
+        <router-view/>
       </v-main>
     </div>
   </v-app>
@@ -207,48 +192,34 @@ export default {
       },
     ],
 
-    photoURL:'',
-    displayName:'',
-    email:'',
+    photoURL: '',
+    displayName: '',
+    email: '',
   }),
 
-beforeCreate: function() {
+  beforeCreate: function () {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in.
-
         this.photoURL = user.photoURL;
         this.displayName = user.displayName;
         this.email = user.email;
-
         console.log(user);
-
         console.log(user.photoURL);
         console.log(user.displayName);
         console.log(user.email);
-
       } else {
-        // User is signed out.   
-
-        this.photoURL = 'https://randomuser.me/api/portraits/men/78.jpg';
-        this.displayName = '未登入';
-        this.email = '好平台，不登入嗎?';
-        
-        console.log('user.photoURL');
-        console.log('user.displayName');
-        console.log('user.email');
-
- 
-
+        this.photoURL = "https://randomuser.me/api/portraits/men/78.jpg";
+        this.displayName = "未登入";
+        this.email = "好平台，不登入嗎?";
+        console.log("未登入");
       }
     })
 
   },
-  
+
   methods: {
     signOut() {
-
       firebase.auth().signOut();
       this.$router.go(0);
     },
