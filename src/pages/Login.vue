@@ -1,33 +1,32 @@
 <template>
-  <v-card class="mx-auto" color="#26c6da" dark max-width="480">
-    <v-card-text>
-      <v-row align="center">
-        <v-col cols="3">
-          <v-img
-              :src="photoURL"
-              alt="Sunny image"
-              width="96"
-          ></v-img>
-        </v-col>
-        <v-col cols="6">
-          <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline">
-                {{ displayName }}
-              </v-list-item-title>
-              <v-list-item-subtitle class="subtitle-1">
-                {{ email }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-col>
-        <v-col cols="3">
-          <v-btn elevation="3" outlined x-large @click="socialLogin" v-show="SignInShowButton">登入</v-btn>
-          <v-btn elevation="3" outlined x-large @click="signOut" v-show="SignOutShowButton">登出</v-btn>
-        </v-col>
-      </v-row>
-    </v-card-text>
-  </v-card>
+  <v-container>
+    <v-row class="justify-center">
+      <v-card class="mx-4 pb-2" max-width="480">
+        <v-list-item three-line>
+          <v-list-item-content>
+            <div class="overline mb-4">帳號資訊</div>
+            <v-list-item-title class="headline mb-1">{{ displayName }}</v-list-item-title>
+            <v-list-item-subtitle class="subtitle-1">{{ email }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-card-actions>
+          <v-btn elevation="3" color="primary" min-width="100%" @click="socialLogin" v-show="!isSignedIn">
+            註冊 / 登入
+          </v-btn>
+          <v-btn color="mx-auto primary" outlined @click="signOut" v-show="isSignedIn">
+            登出
+          </v-btn>
+        </v-card-actions>
+
+        <v-divider class="mx-2 mt-2" v-show="!isSignedIn" />
+
+        <v-card-text v-show="!isSignedIn">
+          註冊或登入即表示您同意我們的隱私權政策和服務條款。
+        </v-card-text>
+      </v-card>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -37,38 +36,34 @@ import 'firebase/auth';
 export default {
   name: "Login",
   data: () => ({
-    SignInShowButton: 1,
-    SignOutShowButton: 0,
+    isSignedIn: false,
+    displayName: "未登入",
+    email: "好平台，不登入嗎?",
     photoURL: "",
-    displayName: "",
-    email: "",
   }),
-  beforeCreate: function () {
+  mounted: function () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.photoURL = user.photoURL;
         this.displayName = user.displayName;
         this.email = user.email;
+        this.photoURL = user.photoURL;
+        this.isSignedIn = true;
 
         console.log(user);
-        this.SignInShowButton = 0;
-        this.SignOutShowButton = 1;
       } else {
+        this.displayName = "未登入";
+        this.email = "好平台，不登入嗎?";
         this.photoURL = "https://www.flaticon.com/svg/static/icons/svg/14/14660.svg";
-        this.displayName = "馬英九(未登入)";
-        this.email = "horse@taiwan.com(未登入)";
-
-        this.SignInShowButton = 1;
-        this.SignOutShowButton = 0;
+        this.isSignedIn = false;
       }
     })
   },
   methods: {
     socialLogin() {
-      var provider = new firebase.auth.FacebookAuthProvider();
+      let provider = new firebase.auth.FacebookAuthProvider();
 
-      firebase.auth().signInWithPopup(provider).then((result) => {     // eslint-disable-line no-unused-vars
-        this.$router.go(0);
+      firebase.auth().signInWithPopup(provider).then((result) => {  // eslint-disable-line no-unused-vars
+        // this.$router.go(0);
       }).catch((err) => {
         console.log("Oops. " + err.message)
       });
