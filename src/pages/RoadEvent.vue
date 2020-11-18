@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" v-for="(link, i) in messages" :key="i">
-        <v-card>
+      <v-col class="pb-1" cols="12" v-for="(link, i) in messages" :key="i">
+        <v-card class="justify-center mx-auto" max-width="480">
           <v-card-text class="pb-1">
             <span class="body-1 text--primary situationTypeTextBorder">{{ convertSituationTypeToText(link.situationType) }}</span>
             <span class="body-1 text--primary pl-2">{{ link.locationText }}</span>
