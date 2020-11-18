@@ -2,9 +2,15 @@
   <v-container>
     <v-row>
       <v-col class="pb-1" cols="12" v-for="(link, i) in messages" :key="i">
-        <v-card class="justify-center mx-auto" max-width="480">
+        <v-card
+            class="justify-center mx-auto"
+            :class="detectSituationTypeToSetBorder(link.situationType)"
+            max-width="480"
+        >
           <v-list-item class="pt-2 pb-0">
-            <span class="body-1 text--primary px-1 py-0 situationTypeTextBorder">{{ convertSituationTypeToText(link.situationType) }}</span>
+            <span class="body-1 text--primary px-1 py-0 situationTypeTextBorder">
+              {{ convertSituationTypeToText(link.situationType) }}
+            </span>
             <span class="body-1 text--primary ml-2">{{ link.locationText }}</span>
             <v-spacer/>
             <v-btn icon>
@@ -58,6 +64,22 @@ export default {
           return "其他";
       }
     },
+    detectSituationTypeToSetBorder(type){
+      switch (type) {
+        case 0:
+        case 1:
+          return "bg_accident_type_2";
+        case 2:
+        case 3:
+          return "bg_accident_type_1";
+        case 4:
+          return "bg_accident_type_4";
+        case 5:
+          return "bg_accident_type_5";
+        default:
+          return "bg_accident_type_5";
+      }
+    },
     formatCompat(date) {
       return date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
     },
@@ -94,5 +116,20 @@ export default {
   border: 1px solid gray;
   border-radius: 4px;
   padding: 2px;
+}
+.bg_accident_type_1 {
+  border-left: 6px solid #F44336;
+}
+.bg_accident_type_2 {
+  border-left: 6px solid #FF9800;
+}
+.bg_accident_type_3 {
+  border-left: 6px solid #4CAF50;
+}
+.bg_accident_type_4 {
+  border-left: 6px solid #2196F3;
+}
+.bg_accident_type_5 {
+  border-left: 6px solid #616161;
 }
 </style>
