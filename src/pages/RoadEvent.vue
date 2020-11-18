@@ -16,9 +16,9 @@
             {{ link.situation }}
           </v-card-text>
 
-          <v-row class="justify-center px-4" dense>
+          <div class="justify-center px-4">
             <v-img :src="link.imageUrl" max-width="100%"/>
-          </v-row>
+          </div>
 
           <v-list-item>
             <span class="subheading">{{ convertTimestamp(link.time) }}</span>
