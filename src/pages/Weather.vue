@@ -1,18 +1,17 @@
 <template>
   <v-container>
-    <v-row dense>
-      <v-col class="text-center">
+    <v-row>
+      <v-col class="text-center" v-show="!showProgress">
         <v-progress-circular
         class="justify-center"
-        v-if="!showProgress"
         indeterminate
         color="primary"
         ></v-progress-circular>
       </v-col>
-      <v-col cols="12" v-for="(item, key) in weatherInfo" :key="key">
+      <v-col class="pb-1" cols="12"  v-for="(item, key) in weatherInfo" :key="key">
         <v-card elevation="2" class="mx-auto" max-width="480">
           <v-row>
-            <v-col class="text-left">
+            <v-col class="justify-start py-2">
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
@@ -24,12 +23,14 @@
                 </v-list-item-content>
               </v-list-item>
             </v-col>
-            <!-- <v-col cols="2"></v-col> -->
-            <v-col class="text-right">
+
+            <v-spacer />
+
+            <v-col class="justify-end py-2 px-0">
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
-                    {{ item.elementValueTemp }}
+                    {{ subStringTemp(item.elementValueTemp) }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     目前溫度
@@ -37,8 +38,9 @@
                 </v-list-item-content>
               </v-list-item>
             </v-col>
-            <v-col class="text-right">
-              <v-list-item two-line>
+
+            <v-col class="justify-end py-2 pl-0">
+              <v-list-item class="pl-0" two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
                     {{ item.elementValueMin10 }}
@@ -65,7 +67,11 @@ export default {
     weatherInfo: [],
     city: "",
   }),
-  methods: {},
+  methods: {
+    subStringTemp(temp) {
+      return temp.substring(0, 2)
+    }
+  },
   computed: {
     showProgress() {
       return this.weatherInfo.length > 0;
