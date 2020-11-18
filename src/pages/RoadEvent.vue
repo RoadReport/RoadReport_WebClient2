@@ -3,12 +3,12 @@
     <v-row>
       <v-col cols="12" v-for="(link, i) in messages" :key="i">
         <v-card>
-          <v-card-text>
-            {{ convertSituationTypeToText(link.situationType) }}
-            <span class="body-1 text--primary">{{ link.locationText }}</span>
+          <v-card-text class="pb-1">
+            <span class="body-1 text--primary situationTypeTextBorder">{{ convertSituationTypeToText(link.situationType) }}</span>
+            <span class="body-1 text--primary pl-2">{{ link.locationText }}</span>
           </v-card-text>
 
-          <v-card-text class="body-1 text--primary">
+          <v-card-text class="body-1 text--primary pt-1">
             {{ link.situation }}
           </v-card-text>
 
@@ -51,7 +51,7 @@ export default {
         case 5:
           return "其他";
         default:
-            return "其他";
+          return "其他";
       }
     },
     formatCompat(date) {
@@ -84,3 +84,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.situationTypeTextBorder {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 2px;
+}
+</style>
