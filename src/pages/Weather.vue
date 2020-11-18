@@ -12,7 +12,7 @@
       <v-col cols="12" v-for="(item, key) in weatherInfo" :key="key">
         <v-card elevation="2" class="mx-auto" max-width="480">
           <v-row>
-            <v-col cols="3">
+            <v-col class="text-left">
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
@@ -24,8 +24,8 @@
                 </v-list-item-content>
               </v-list-item>
             </v-col>
-            <v-col cols="2"></v-col>
-            <v-col cols="3">
+            <!-- <v-col cols="2"></v-col> -->
+            <v-col class="text-right">
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
@@ -37,7 +37,7 @@
                 </v-list-item-content>
               </v-list-item>
             </v-col>
-            <v-col cols="4">
+            <v-col class="text-right">
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title class="title font-weight-regular">
