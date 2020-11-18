@@ -7,6 +7,7 @@ import emptyLayout from "@/layout/empty";
 
 import About from "@/pages/About";
 import Announcement from "@/pages/Announcement";
+import EventEditor from "@/pages/EventEditor";
 import LiveCam from "@/pages/LiveCam";
 import Login from "@/pages/Login";
 import RoadEvent from "@/pages/RoadEvent";
@@ -74,6 +75,11 @@ export default new Router({
           path: "/login",
           name: "Login",
           component: Login,
+        },
+        {
+          path: "/eventeditor",
+          name: "EventEditor",
+          component: EventEditor,
         },
       ],
     },
