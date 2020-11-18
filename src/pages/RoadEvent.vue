@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-row dense>
+    <v-row>
       <v-col cols="12" v-for="(link, i) in messages" :key="i">
-        <v-card elevation="2" class="mx-auto" max-width="480">
+        <v-card>
           <v-card-text>
-            {{ link.situationType }}
+            {{ convertSituationTypeToText(link.situationType) }}
             <span class="body-1 text--primary">{{ link.locationText }}</span>
           </v-card-text>
 
@@ -12,14 +12,14 @@
             {{ link.situation }}
           </v-card-text>
 
-          <v-row dense align="center" justify="center">
-            <v-img :src="link.imageUrl" max-width="400"></v-img>
+          <v-row class="justify-center px-4" dense>
+            <v-img :src="link.imageUrl" max-width="100%"/>
           </v-row>
 
-          <v-list-item class="grow">
-            <v-row align="center" justify="end">
-              <span class="subheading">{{ link.userName }}</span>
-            </v-row>
+          <v-list-item>
+            <span class="subheading">{{ convertTimestamp(link.time) }}</span>
+            <v-spacer/>
+            <span class="subheading">{{ link.userName }}</span>
           </v-list-item>
         </v-card>
       </v-col>
@@ -35,7 +35,33 @@ export default {
   data: () => ({
     messages: [],
   }),
-  methods: {},
+  methods: {
+    convertSituationTypeToText(situationType) {
+      switch (situationType) {
+        case 0:
+          return "事故";
+        case 1:
+          return "注意";
+        case 2:
+          return "臨檢";
+        case 3:
+          return "測速";
+        case 4:
+          return "天氣";
+        case 5:
+          return "其他";
+        default:
+            return "其他";
+      }
+    },
+    formatCompat(date) {
+      return date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
+    },
+    convertTimestamp(time) {
+      let date = new Date(time.seconds * 1000);
+      return this.formatCompat(date);
+    },
+  },
   beforeCreate() {
     if (localStorage.getItem("RoadCode") == null) {
       this.$router.push("roadselect");
@@ -53,7 +79,7 @@ export default {
         .collection("ReportAccident")
         .doc(roadcode)
         .collection("accidents")
-        .orderBy("time"),
+        .orderBy("time", "desc"),
     };
   },
 };
