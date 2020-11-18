@@ -174,7 +174,7 @@ export default {
         url: "weather",
       },
       {
-        title: "影像",
+        title: "即時影像",
         icon: "mdi-camera",
         url: "livecam",
       },
