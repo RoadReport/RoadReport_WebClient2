@@ -3,12 +3,16 @@
     <v-row>
       <v-col class="pb-1" cols="12" v-for="(link, i) in messages" :key="i">
         <v-card class="justify-center mx-auto" max-width="480">
-          <v-card-text class="pb-1">
-            <span class="body-1 text--primary situationTypeTextBorder">{{ convertSituationTypeToText(link.situationType) }}</span>
-            <span class="body-1 text--primary pl-2">{{ link.locationText }}</span>
-          </v-card-text>
+          <v-list-item class="pt-2 pb-0">
+            <span class="body-1 text--primary px-1 py-0 situationTypeTextBorder">{{ convertSituationTypeToText(link.situationType) }}</span>
+            <span class="body-1 text--primary ml-2">{{ link.locationText }}</span>
+            <v-spacer/>
+            <v-btn icon>
+              <v-icon>mdi-dots-horizontal</v-icon>
+            </v-btn>
+          </v-list-item>
 
-          <v-card-text class="body-1 text--primary pt-1">
+          <v-card-text class="body-1 text--primary pt-0">
             {{ link.situation }}
           </v-card-text>
 
