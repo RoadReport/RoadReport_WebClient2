@@ -3,7 +3,7 @@
     <v-row>
       <v-col class="pb-0" cols="12" v-for="(item, i) in items" :key="i">
         <v-card
-          class="mx-auto"
+          class="mx-auto py-2"
           max-width="480"
           :color="item.color"
           @click="selectRoad(item.roadcode)"
