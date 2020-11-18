@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-row dense>
-      <v-col cols="12" v-for="(item, i) in items" :key="i">
+    <v-row>
+      <v-col class="pb-0" cols="12" v-for="(item, i) in items" :key="i">
         <v-card
           class="mx-auto"
           max-width="480"
@@ -10,13 +10,19 @@
           link
           dark
         >
-          <div class="d-flex flex-no-wrap justify-space-between align-center">
-            <div>
-              <v-card-title class="headline" v-text="item.title"></v-card-title>
-              <v-card-subtitle v-text="item.artist"></v-card-subtitle>
-            </div>
+          <div class="d-flex flex-no-wrap justify-space-between align-center pl-4 pr-2">
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title class="headline">
+                  {{ item.title }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ item.artist }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
 
-            <v-avatar class="ma-3" size="96" tile>
+            <v-avatar class="ma-3" size="80" tile>
               <v-img :src="item.src"/>
             </v-avatar>
           </div>
