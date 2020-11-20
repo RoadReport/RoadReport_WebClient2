@@ -1,35 +1,29 @@
 <template>
   <v-container>
     <v-bottom-sheet v-model="sheetAndroid">
-      <v-sheet
-        class="text-center"
-        height="200px"
-      >
-        <v-btn
-          class="mt-6"
-          text
-          color="red"
-          @click="sheet = !sheet"
-        >
+      <v-sheet class="text-center" height="350px">
+        <v-btn class="mt-6" text color="red" @click="sheetAndroid = !sheetAndroid">
           關閉
         </v-btn>
         <div class="py-3">
-          您可以前往 Play Store 下載 APP。
+          Android 平台有專用應用程式，<br />您可以前往 Play Store 下載 APP。
+          <a
+            target="_blank"
+            href="https://play.google.com/store/apps/details?id=com.txwstudio.app.roadreport"
+          >
+            <v-img
+              src="https://play.google.com/intl/en_us/badges/static/images/badges/zh-tw_badge_web_generic.png"
+              width="256"
+            >
+            </v-img>
+          </a>
         </div>
       </v-sheet>
     </v-bottom-sheet>
 
     <v-bottom-sheet v-model="sheetiOS">
-      <v-sheet
-        class="text-center"
-        height="200px"
-      >
-        <v-btn
-          class="mt-6"
-          text
-          color="red"
-          @click="sheet = !sheet"
-        >
+      <v-sheet class="text-center" height="200px">
+        <v-btn class="mt-6" text color="red" @click="sheetiOS = !sheetiOS">
           關閉
         </v-btn>
         <div class="py-3">
@@ -47,14 +41,22 @@
             </v-icon>
           </v-avatar>
 
-          網頁版尚在開發中，使用上若有問題都是正常的。<br>
+          網頁版尚在開發中，使用上若有問題都是正常的。<br />
           點擊下方連結以查看不同平台的使用說明。
 
           <template v-slot:actions>
-            <v-btn text color="deep-purple accent-4" @click="sheetAndroid = !sheetAndroid">
+            <v-btn
+              text
+              color="deep-purple accent-4"
+              @click="sheetAndroid = !sheetAndroid"
+            >
               Android
             </v-btn>
-            <v-btn text color="deep-purple accent-4" @click="sheetiOS = !sheetiOS">
+            <v-btn
+              text
+              color="deep-purple accent-4"
+              @click="sheetiOS = !sheetiOS"
+            >
               iOS
             </v-btn>
           </template>
