@@ -89,7 +89,7 @@
               width="40"
           />
         </div>
-        <v-toolbar-title>看路!</v-toolbar-title>
+        <v-toolbar-title>看路</v-toolbar-title>
         <v-spacer />
 
         <v-dialog v-model="dialog" width="500">
