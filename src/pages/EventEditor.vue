@@ -7,7 +7,7 @@
 
 
 
-      <v-col >
+      <v-col>
         <h5>目前所在道路</h5>
         <v-text-field label="路段" single-line solo></v-text-field>
         <h5>事件種類</h5>
@@ -18,6 +18,9 @@
         <v-textarea label="簡短描述你眼前發生之狀況" single-line solo no-resize rows="5"></v-textarea>
         <h5>圖片 - 選擇性</h5>
         <v-file-input accept="image/*" label="File input"></v-file-input>
+
+        <v-btn color="primary" elevation="4" x-large><v-icon left>mdi-send</v-icon>送出</v-btn>
+
       </v-col>
 
     </v-row>
