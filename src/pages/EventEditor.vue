@@ -9,9 +9,9 @@
 
       <v-col>
         <h5>目前所在道路</h5>
-        <v-text-field label="路段" single-line solo></v-text-field>
+        <v-select label="路段" solo :items="RoadChoice"></v-select>
         <h5>事件種類</h5>
-        <v-select label="請選擇事故種類" solo :items="dropdown_font"></v-select>
+        <v-select label="請選擇事故種類" solo :items="EventSelection"></v-select>
         <h5>地點 - 10 字內</h5>
         <v-text-field label="明顯地標或公里數" single-line solo append-icon="mdi-map-marker"></v-text-field>
         <h5>狀況</h5>
@@ -31,8 +31,10 @@
 export default {
   name: "EventEditor",
 
- data: () => ({
-    dropdown_font: ['事故', '注意', '臨檢', '測速', '天氣', '其他'],
+  data: () => ({
+    RoadChoice: ['台24', '182縣道'],
+    EventSelection: ['事故', '注意', '臨檢', '測速', '天氣', '其他'],
+    
   }),
 
 };

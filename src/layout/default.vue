@@ -213,12 +213,5 @@ export default {
     })
 
   },
-
-  methods: {
-    signOut() {
-      firebase.auth().signOut();
-      // this.$router.go(0);
-    },
-  },
 };
 </script>
