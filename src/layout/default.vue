@@ -95,16 +95,16 @@
         <v-dialog v-model="dialog" width="500">
           <template v-slot:activator="{ on, attrs }">
             <v-btn text v-bind="attrs" v-on="on">
-              <span class="mr-2">切換道路</span>
+              <span class="mr-2">一個按鈕</span>
               <v-icon>mdi-compare-horizontal</v-icon>
             </v-btn>
           </template>
 
           <v-card>
             <v-card-title class="headline lighten-2">
-              切換道路
+              嗨
             </v-card-title>
-            <v-list nav dense>
+            <v-list nav>
               <v-list-item-group color="primary">
                 <v-list-item>
                   <v-list-item-icon>
@@ -112,17 +112,7 @@
                   </v-list-item-icon>
 
                   <v-list-item-content>
-                    <v-list-item-title>台 24</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-car-info</v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>182縣道</v-list-item-title>
+                    <v-list-item-title>按我</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
 
