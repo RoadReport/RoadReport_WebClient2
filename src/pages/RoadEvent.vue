@@ -3,6 +3,7 @@
     <v-fab-transition>
       <v-btn
           v-show="isSignedIn"
+          to="/eventeditor"
           color="#03DAC6"
           dark
           fixed

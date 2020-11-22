@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" v-show="!showProgress">
         <v-alert type="info">
-          如果讀取太久可能是程式出問題了，請點選其他頁面並重新進入本頁面。
+          如果讀取太久可能是程式出問題了，請點選其他頁面後並重新進入本頁面。
         </v-alert>
       </v-col >
       <v-col class="text-center" cols="12" v-show="!showProgress">

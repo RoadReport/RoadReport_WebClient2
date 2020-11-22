@@ -18,7 +18,7 @@ export default {
   name: "Empty",
   methods: {
     backToHome() {
-      this.$router.push("/");
+      this.$router.back();
     },
   },
   computed: {
