@@ -1,5 +1,18 @@
 <template>
   <v-container>
+    <v-fab-transition>
+      <v-btn
+          v-show="isSignedIn"
+          color="#03DAC6"
+          dark
+          fixed
+          bottom
+          right
+          fab
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </v-fab-transition>
     <v-row>
       <v-col class="pb-1" cols="12" v-for="(link, i) in messages" :key="i">
         <v-card
@@ -38,12 +51,14 @@
 </template>
 
 <script>
-import { db } from "@/service/FirebaseFirestoreService";
+import {firebaseGlobal} from "@/service/FirebaseService";
+import {db} from "@/service/FirebaseFirestoreService";
 
 export default {
   name: "RoadEvent",
   data: () => ({
     messages: [],
+    isSignedIn: false,
   }),
   methods: {
     convertSituationTypeToText(situationType) {
@@ -64,7 +79,7 @@ export default {
           return "其他";
       }
     },
-    detectSituationTypeToSetBorder(type){
+    detectSituationTypeToSetBorder(type) {
       switch (type) {
         case 0:
         case 1:
@@ -93,19 +108,28 @@ export default {
       this.$router.push("roadselect");
       console.log("You fucking donkey.");
       console.log(
-        "%c ",
-        "font-size:800px; background:url(https://i.pinimg.com/originals/ad/fa/0c/adfa0c865a9312afea03150e1fb1cfbd.gif) no-repeat;"
+          "%c ",
+          "font-size:800px; background:url(https://i.pinimg.com/originals/ad/fa/0c/adfa0c865a9312afea03150e1fb1cfbd.gif) no-repeat;"
       );
     }
+  },
+  mounted() {
+    firebaseGlobal.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.isSignedIn = true;
+      } else {
+        this.isSignedIn = false;
+      }
+    })
   },
   firestore() {
     let roadcode = localStorage.getItem("RoadCode");
     return {
       messages: db
-        .collection("ReportAccident")
-        .doc(roadcode)
-        .collection("accidents")
-        .orderBy("time", "desc"),
+          .collection("ReportAccident")
+          .doc(roadcode)
+          .collection("accidents")
+          .orderBy("time", "desc"),
     };
   },
 };
@@ -117,18 +141,23 @@ export default {
   border-radius: 4px;
   padding: 2px;
 }
+
 .bg_accident_type_1 {
   border-left: 6px solid #F44336;
 }
+
 .bg_accident_type_2 {
   border-left: 6px solid #FF9800;
 }
+
 .bg_accident_type_3 {
   border-left: 6px solid #4CAF50;
 }
+
 .bg_accident_type_4 {
   border-left: 6px solid #2196F3;
 }
+
 .bg_accident_type_5 {
   border-left: 6px solid #616161;
 }
