@@ -6,7 +6,7 @@
           關閉
         </v-btn>
         <div class="py-3">
-          Android 平台有專用應用程式，<br />您可以前往 Play Store 下載 APP。
+          Android 平台有專用應用程式，<br/>您可以前往 Play Store 下載 APP。
           <a
             target="_blank"
             href="https://play.google.com/store/apps/details?id=com.txwstudio.app.roadreport"
@@ -41,7 +41,7 @@
             </v-icon>
           </v-avatar>
 
-          網頁版尚在開發中，使用上若有問題都是正常的。<br />
+          網頁版尚在開發中，使用上若有問題都是正常的。<br/>
           點擊下方連結以查看不同平台的使用說明。
 
           <template v-slot:actions>
@@ -63,35 +63,61 @@
         </v-banner>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col class="pb-0" cols="12" v-for="(item, i) in items" :key="i">
-        <v-card
-          class="mx-auto py-2"
-          max-width="480"
-          :color="item.color"
-          @click="selectRoad(item.roadcode)"
-          link
-          dark
+        <v-dialog
+            v-model="dialog"
+            max-width="440"
         >
-          <div
-            class="d-flex flex-no-wrap justify-space-between align-center pl-4 pr-2"
-          >
-            <v-list-item two-line>
-              <v-list-item-content>
-                <v-list-item-title class="headline">
-                  {{ item.title }}
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                  {{ item.artist }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+          <template v-slot:activator="{ on, attrs }">
+            <v-card
+                class="mx-auto py-2"
+                max-width="480"
+                v-bind="attrs"
+                v-on="on"
+                :color="item.color"
+                @click="selectRoad(item.roadcode)"
+                link
+                dark
+            >
+              <div
+                  class="d-flex flex-no-wrap justify-space-between align-center pl-4 pr-2"
+              >
+                <v-list-item two-line>
+                  <v-list-item-content>
+                    <v-list-item-title class="headline">
+                      {{ item.title }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      {{ item.artist }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
 
-            <v-avatar class="ma-3" size="80" tile>
-              <v-img :src="item.src" />
-            </v-avatar>
-          </div>
-        </v-card>
+                <v-avatar class="ma-3" size="80" tile>
+                  <v-img :src="item.src"/>
+                </v-avatar>
+              </div>
+            </v-card>
+          </template>
+
+          <v-card>
+            <v-list nav>
+              <v-list-item-group color="primary">
+                <v-list-item v-for="(item, i) in dialogNavigation" :key="i" :to="item.url">
+                  <v-list-item-icon>
+                    <v-icon>{{ item.icon }}</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+        </v-dialog>
+
       </v-col>
     </v-row>
   </v-container>
@@ -118,6 +144,23 @@ export default {
         artist: "位於台南高雄交界",
         roadcode: 1,
       },
+    ],
+    dialogNavigation: [
+      {
+        title: "路況",
+        icon: "mdi-car-info",
+        url: "roadevent",
+      },
+      {
+        title: "天氣",
+        icon: "mdi-weather-cloudy",
+        url: "weather",
+      },
+      {
+        title: "即時影像",
+        icon: "mdi-camera",
+        url: "livecam",
+      }
     ],
   }),
   methods: {
