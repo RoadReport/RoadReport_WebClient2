@@ -20,7 +20,7 @@
             :class="detectSituationTypeToSetBorder(link.situationType)"
             max-width="480"
         >
-          <v-list-item class="pt-2 pb-0">
+          <v-list-item class="pt-1 pb-0 px-2">
             <span class="body-1 text--primary px-1 py-0 situationTypeTextBorder">
               {{ convertSituationTypeToText(link.situationType) }}
             </span>
@@ -31,18 +31,18 @@
             </v-btn>
           </v-list-item>
 
-          <v-card-text class="body-1 text--primary pt-0">
+          <v-card-text class="body-1 text--primary pt-0 px-2">
             {{ link.situation }}
           </v-card-text>
 
-          <div class="justify-center px-4">
-            <v-img :src="link.imageUrl" max-width="100%"/>
+          <div class="justify-center pl-2 pr-3">
+            <v-img :src="link.imageUrl" max-width="100%" max-height="600px"/>
           </div>
 
-          <v-list-item>
-            <span class="subheading">{{ convertTimestamp(link.time) }}</span>
+          <v-list-item class="pl-2 pr-3">
+            <span class="body-2">{{ convertTimestamp(link.time) }}</span>
             <v-spacer/>
-            <span class="subheading">{{ link.userName }}</span>
+            <span class="body-2">{{ link.userName }}</span>
           </v-list-item>
         </v-card>
       </v-col>
