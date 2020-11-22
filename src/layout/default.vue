@@ -89,7 +89,7 @@
               width="40"
           />
         </div>
-        <v-toolbar-title>看路</v-toolbar-title>
+        <v-toolbar-title>{{ toolbarTitle }}</v-toolbar-title>
         <v-spacer />
 
         <v-dialog v-model="dialog" width="500">
@@ -186,7 +186,22 @@ export default {
     displayName: '',
     email: '',
   }),
-
+  computed: {
+    toolbarTitle() {
+      switch (this.$route.path) {
+        case "/roadselect":
+          return "看路"
+        case "/roadevent":
+          return "路況"
+        case "/weather":
+          return "天氣"
+        case "/livecam":
+          return "即時影像"
+        default:
+          return ""
+      }
+    },
+  },
   beforeCreate: function () {
 
     firebase.auth().onAuthStateChanged((user) => {
