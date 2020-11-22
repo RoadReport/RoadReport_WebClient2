@@ -1,14 +1,19 @@
 <template>
   <v-container>
     <v-row>
-      <v-col class="text-center" v-show="!showProgress">
+      <v-col cols="12" v-show="!showProgress">
+        <v-alert type="info">
+          如果讀取太久可能是程式出問題了，請點選其他頁面並重新進入本頁面。
+        </v-alert>
+      </v-col >
+      <v-col class="text-center" cols="12" v-show="!showProgress">
         <v-progress-circular
-        class="justify-center"
-        indeterminate
-        color="primary"
+            class="justify-center"
+            indeterminate
+            color="primary"
         ></v-progress-circular>
       </v-col>
-      <v-col class="pb-1" cols="12"  v-for="(item, key) in weatherInfo" :key="key">
+      <v-col class="pb-1" cols="12" v-for="(item, key) in weatherInfo" :key="key">
         <v-card elevation="2" class="mx-auto" max-width="480" color="#4aa285">
           <v-row>
             <v-col class="justify-start py-2">
@@ -24,7 +29,7 @@
               </v-list-item>
             </v-col>
 
-            <v-spacer />
+            <v-spacer/>
 
             <v-col class="justify-end py-2 px-0">
               <v-list-item two-line>
@@ -53,6 +58,15 @@
             </v-col>
           </v-row>
         </v-card>
+      </v-col>
+      <v-col cols="12">
+        <v-divider />
+        <p class="mt-2">
+          數值來源為中央氣象局放置於各地的自動氣象站，本頁擷取鄰近於該道路之氣象站資訊。<br><br>
+          數值含意：<br>
+          -998.00：表示過去六小時內無降雨<br>
+          0.00 或以上：過去 10 分鐘內降雨量
+        </p>
       </v-col>
     </v-row>
   </v-container>
