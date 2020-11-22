@@ -9,16 +9,16 @@
         ></v-progress-circular>
       </v-col>
       <v-col class="pb-1" cols="12"  v-for="(item, key) in weatherInfo" :key="key">
-        <v-card elevation="2" class="mx-auto" max-width="480">
+        <v-card elevation="2" class="mx-auto" max-width="480" color="#4aa285">
           <v-row>
             <v-col class="justify-start py-2">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title class="title font-weight-regular">
+                  <v-list-item-title class="title font-weight-regular white--text">
                     {{ item.locationName }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
-                    {{ item.stationId }}
+                    <span class="weatherCardSubtitleTextColor">{{ item.stationId }}</span>
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -29,11 +29,11 @@
             <v-col class="justify-end py-2 px-0">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title class="title font-weight-regular">
+                  <v-list-item-title class="title font-weight-regular white--text">
                     {{ subStringTemp(item.elementValueTemp) }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
-                    目前溫度
+                    <span class="weatherCardSubtitleTextColor">目前溫度</span>
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -42,11 +42,11 @@
             <v-col class="justify-end py-2 pl-0">
               <v-list-item class="pl-0" two-line>
                 <v-list-item-content>
-                  <v-list-item-title class="title font-weight-regular">
+                  <v-list-item-title class="title font-weight-regular white--text">
                     {{ item.elementValueMin10 }}
                   </v-list-item-title>
-                  <v-list-item-subtitle>
-                    10 分鐘雨量
+                  <v-list-item-subtitle class="weatherCardSubtitleTextColor">
+                    <span class="weatherCardSubtitleTextColor">10 分鐘雨量</span>
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -94,3 +94,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.weatherCardSubtitleTextColor {
+  color: #eeeeee;
+}
+</style>
