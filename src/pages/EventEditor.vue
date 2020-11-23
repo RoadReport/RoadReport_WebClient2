@@ -9,9 +9,9 @@
 
       <v-col>
         <h5>目前所在道路</h5>
-        <v-select  label="路段" solo :items="RoadChoice"></v-select>
+        <v-select v-model="RoadSection" label="路段" solo :items="RoadChoice"></v-select>
         <h5>事件種類</h5>
-        <v-select v-model="situationType" :value="EventSelection" label="請選擇事故種類" solo :items="EventSelection"></v-select>
+        <v-select v-model="situationType" label="請選擇事故種類" solo :items="EventSelection"></v-select>
         <h5>地點 - 10 字內</h5>
         <v-text-field v-model="locationText" :value="locationText" label="明顯地標或公里數" single-line solo append-icon="mdi-map-marker"></v-text-field>
         <h5>狀況</h5>
@@ -39,9 +39,15 @@ export default {
     RoadChoice: ['台24', '182縣道'],
     EventSelection: ['事故', '注意', '臨檢', '測速', '天氣', '其他'],
 
+    RoadSection: '',
+    Road : '',
+
+    imageUrl: '',
+    // locationGeoPoint: '',
     locationText: '',
     situation: '',
     situationType: '',
+    // time: '',
     displayName: '',
     userUid: '',
   }),
@@ -59,24 +65,59 @@ export default {
 
   methods: {
     add() {
-         db.collection('ReportAccident').doc('1').collection('accidents').add({
-            imageUrl: '',
-            locationGeoPoint: new firebase.firestore.GeoPoint( 0, 0 ),
-            locationText: this.locationText,
-            situation: this.situation,
-            situationType: Number(this.situationType),
-            time: firebase.firestore.FieldValue.serverTimestamp(),
-            userName: this.displayName,
-            userUid: this.userUid,
-        })
-        .then(function(docRef)  {
-          console.log('成功', docRef.id);
-        })
+     
+     var R = this.RoadSection;
+     if(R == '台24')
+     {
+       this.Road = '0';
+     }
+     else if(R == '182縣道')
+     {
+       this.Road = '1';
+     }
+     
+     var s = this.situationType;
+     var a;
+     if(s == '事故')
+     {
+       a = 0;
+     }
+     else if(s == '注意')
+     {
+       a = 1;
+     }
+     else if(s == '臨檢')
+     {
+       a = 2;
+     }
+     else if(s == '測速')
+     {
+       a = 3;
+     }
+     else if(s == '天氣')
+     {
+       a = 4;
+     }
+     else if(s == '其他')
+     {
+       a = 5;
+     }
+     
+     
+      db.collection('ReportAccident').doc(this.Road).collection('accidents').add({
+        imageUrl: '',
+        locationGeoPoint: new firebase.firestore.GeoPoint( 0, 0 ),
+        locationText: this.locationText,
+        situation: this.situation,
+        situationType: Number(a),
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+        userName: this.displayName,
+        userUid: this.userUid,
+      })
+      .then(function(docRef)  {
+        console.log('成功', docRef.id);
+      })
         
-        
-   
-
-
     },
   },
 
