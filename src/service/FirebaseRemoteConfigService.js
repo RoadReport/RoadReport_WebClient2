@@ -9,16 +9,16 @@ remoteConfig.settings = {
 remoteConfig
   .ensureInitialized()
   .then(() => {
-    console.log("Firebase Remote Config is initialized");
+    console.log("[Firebase Remote Config] Firebase Remote Config is initialized");
   })
   .catch((err) => {
-    console.error("Firebase Remote Config failed to initialize", err);
+    console.error("[Firebase Remote Config] Firebase Remote Config failed to initialize", err);
   });
 
 remoteConfig
   .fetchAndActivate()
   .then(() => {
-    console.log("fetchAndActivate Success!");
+    console.log("[Firebase Remote Config] fetchAndActivate Success!");
   })
   .catch((err) => {
     console.error(err);
