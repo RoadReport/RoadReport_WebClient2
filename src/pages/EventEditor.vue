@@ -1,28 +1,55 @@
 <template>
   <v-container>
     <v-row class="justify-center">
-     
-     
-      <!-- <h3>事件編輯器</h3> -->
-
-
-
       <v-col>
-        <h5>目前所在道路</h5>
-        <v-select v-model="RoadSection" label="路段" solo :items="RoadChoice"></v-select>
-        <h5>事件種類</h5>
-        <v-select v-model="situationType" label="請選擇事故種類" solo :items="EventSelection"></v-select>
-        <h5>地點 - 10 字內</h5>
-        <v-text-field v-model="locationText" :value="locationText" label="明顯地標或公里數" single-line solo append-icon="mdi-map-marker"></v-text-field>
-        <h5>狀況</h5>
-        <v-textarea v-model="situation" :value="situation" label="簡短描述你眼前發生之狀況" single-line solo no-resize rows="5"></v-textarea>
-        <h5>圖片 - 選擇性</h5>
-        <v-file-input accept="image/*" label="File input"></v-file-input>
+        <h5 class="mb-2">目前所在道路</h5>
+        <v-text-field
+            :label="currentRoadText"
+            solo
+            disabled
+        ></v-text-field>
 
-        <v-btn color="primary" elevation="4" x-large @click="add"><v-icon left>mdi-send</v-icon>送出</v-btn>
+        <h5 class="mb-2">事件種類</h5>
+        <v-select
+            v-model="situationType"
+            label="事故種類"
+            solo
+            :items="EventSelection"
+        ></v-select>
 
+        <h5 class="mb-2">地點</h5>
+        <v-text-field
+            v-model="locationText"
+            :value="locationText"
+            label="明顯地標或公里數"
+            single-line
+            solo
+            append-icon="mdi-map-marker"
+        ></v-text-field>
+
+        <h5 class="mb-2">狀況</h5>
+        <v-textarea
+            v-model="situation"
+            :value="situation"
+            label="簡短描述你眼前發生之狀況"
+            single-line
+            solo
+            no-resize
+            rows="5"
+        ></v-textarea>
+
+        <h5 class="mb-2">圖片 - 選擇性</h5>
+        <v-file-input
+            accept="image/*"
+            label="上傳圖片"
+            prepend-icon="mdi-camera"
+        ></v-file-input>
+
+        <v-btn color="primary" elevation="4" block @click="add">
+          <v-icon left>mdi-send</v-icon>
+          送出
+        </v-btn>
       </v-col>
-
     </v-row>
   </v-container>
 </template>
@@ -31,32 +58,38 @@
 import {db} from "@/service/FirebaseFirestoreService";
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import {getCurrentRoadCode, getCurrRoadName} from "@/service/RoadCode";
 
 export default {
   name: "EventEditor",
 
   data: () => ({
-    RoadChoice: ['台24', '182縣道'],
     EventSelection: ['事故', '注意', '臨檢', '測速', '天氣', '其他'],
+    EventSelections: [
+      { text: '事故', value: 0 },
+      { text: '注意', value: 1 },
+      { text: '臨檢', value: 2 },
+      { text: '測速', value: 3 },
+      { text: '天氣', value: 4 },
+      { text: '其他', value: 5 },
+    ],
 
-    RoadSection: '',
-    Road : '',
+    currentRoadText: getCurrRoadName(),
 
-    imageUrl: '',
-    // locationGeoPoint: '',
-    locationText: '',
-    situation: '',
-    situationType: '',
-    // time: '',
+    currentRoadCode: getCurrentRoadCode(),
     displayName: '',
     userUid: '',
+    situationType: { text: '未知錯誤', value: -1 },
+    locationText: '',
+    situation: '',
+    imageUrl: '',
   }),
 
   mounted: function () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.displayName = user.displayName;
-        this.userUid = user.uid;  
+        this.userUid = user.uid;
       } else {
         console.log("未登入");
       }
@@ -65,59 +98,40 @@ export default {
 
   methods: {
     add() {
-     
-     var R = this.RoadSection;
-     if(R == '台24')
-     {
-       this.Road = '0';
-     }
-     else if(R == '182縣道')
-     {
-       this.Road = '1';
-     }
-     
-     var s = this.situationType;
-     var a;
-     if(s == '事故')
-     {
-       a = 0;
-     }
-     else if(s == '注意')
-     {
-       a = 1;
-     }
-     else if(s == '臨檢')
-     {
-       a = 2;
-     }
-     else if(s == '測速')
-     {
-       a = 3;
-     }
-     else if(s == '天氣')
-     {
-       a = 4;
-     }
-     else if(s == '其他')
-     {
-       a = 5;
-     }
-     
-     
-      db.collection('ReportAccident').doc(this.Road).collection('accidents').add({
-        imageUrl: '',
-        locationGeoPoint: new firebase.firestore.GeoPoint( 0, 0 ),
-        locationText: this.locationText,
-        situation: this.situation,
-        situationType: Number(a),
-        time: firebase.firestore.FieldValue.serverTimestamp(),
-        userName: this.displayName,
-        userUid: this.userUid,
-      })
-      .then(function(docRef)  {
-        console.log('成功', docRef.id);
-      })
-        
+      var s = this.situationType;
+      var a;
+      if (s == '事故') {
+        a = 0;
+      } else if (s == '注意') {
+        a = 1;
+      } else if (s == '臨檢') {
+        a = 2;
+      } else if (s == '測速') {
+        a = 3;
+      } else if (s == '天氣') {
+        a = 4;
+      } else if (s == '其他') {
+        a = 5;
+      }
+
+      console.log(this.situationType.text)
+      db.collection('ReportAccident')
+          .doc(this.currentRoadCode)
+          .collection('accidents')
+          .add({
+            userName: this.displayName,
+            userUid: this.userUid,
+            time: firebase.firestore.FieldValue.serverTimestamp(),
+            situationType: Number(a),
+            locationText: this.locationText,
+            locationGeoPoint: new firebase.firestore.GeoPoint(0, 0),
+            situation: this.situation,
+            imageUrl: '',
+          })
+          .then(function (docRef) {
+            console.log('成功', docRef.id);
+          })
+
     },
   },
 
