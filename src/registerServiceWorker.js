@@ -10,8 +10,9 @@ if (process.env.NODE_ENV === 'production') {
         'For more details, visit https://goo.gl/AFskqB'
       )
     },
-    registered () {
+    registered (registration) {
       console.log('Service worker has been registered.')
+      registration.updateViaCache
     },
     cached () {
       console.log('Content has been cached for offline use.')
