@@ -67,7 +67,6 @@
     <v-row>
       <v-col class="pb-0" cols="12" v-for="(item, i) in items" :key="i">
         <v-dialog
-            v-model="dialog"
             max-width="440"
         >
           <template v-slot:activator="{ on, attrs }">
