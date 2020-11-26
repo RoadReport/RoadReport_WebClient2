@@ -12,6 +12,7 @@ Vue.use(VueAxios, axios);
 Vue.use(firestorePlugin);
 
 Vue.config.productionTip = false;
+Vue.config.devtools = false
 
 new Vue({
   el: "#app",
