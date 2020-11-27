@@ -27,9 +27,26 @@
             </span>
             <span class="body-1 text--primary ml-2">{{ link.locationText }}</span>
             <v-spacer/>
-            <v-btn icon>
-              <v-icon>mdi-dots-horizontal</v-icon>
-            </v-btn>
+
+            <v-dialog max-width="440">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on">
+                  <v-icon>mdi-dots-horizontal</v-icon>
+                </v-btn>
+              </template>
+  
+              <v-list nav>
+                <v-list-item-group color="primary">
+                  <v-list-item v-for="(item, i) in select" :key="i" :to="item.url" dense>
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
+            </v-dialog>
+
+           
           </v-list-item>
 
           <v-card-text class="body-1 text--primary pt-0 px-2">
@@ -60,6 +77,17 @@ export default {
   data: () => ({
     messages: [],
     isSignedIn: false,
+
+    select: [
+      {
+        title: "編輯",
+        url: "/",
+      },
+      {
+        title: "刪除",
+        url: "/",
+      },
+    ],
   }),
   methods: {
     convertSituationTypeToText(situationType) {
@@ -103,6 +131,11 @@ export default {
       let date = new Date(time.seconds * 1000);
       return this.formatCompat(date);
     },
+
+    asd(){
+console.log('aaa');
+    },
+    
   },
   beforeCreate() {
     if (localStorage.getItem("RoadCode") == null) {

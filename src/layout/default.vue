@@ -91,35 +91,6 @@
         </div>
         <v-toolbar-title>{{ toolbarTitle }}</v-toolbar-title>
         <v-spacer />
-
-        <v-dialog v-model="dialog" width="500">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn text v-bind="attrs" v-on="on">
-              <span class="mr-2">一個按鈕</span>
-              <v-icon>mdi-compare-horizontal</v-icon>
-            </v-btn>
-          </template>
-
-          <v-card>
-            <v-card-title class="headline lighten-2">
-              嗨
-            </v-card-title>
-            <v-list nav>
-              <v-list-item-group color="primary">
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-car-info</v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>按我</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-
-              </v-list-item-group>
-            </v-list>
-          </v-card>
-        </v-dialog>
       </v-app-bar>
 
       <v-main>

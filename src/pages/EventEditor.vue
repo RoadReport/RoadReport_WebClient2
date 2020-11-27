@@ -38,14 +38,15 @@
             rows="5"
         ></v-textarea>
 
-        <h5 class="mb-2">圖片 - 選擇性</h5>
+        <h5 class="mb-2">圖片 - 選擇性 (暫時沒有功能)</h5>
         <v-file-input
+            disabled
             accept="image/*"
             label="上傳圖片"
             prepend-icon="mdi-camera"
         ></v-file-input>
 
-        <v-btn color="primary" elevation="4" block @click="add">
+        <v-btn color="primary" elevation="4" block v-show="isSignedIn" @click="add">
           <v-icon left>mdi-send</v-icon>
           送出
         </v-btn>
@@ -83,14 +84,18 @@ export default {
     locationText: '',
     situation: '',
     imageUrl: '',
+
+    isSignedIn: false,
   }),
 
   mounted: function () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        this.isSignedIn = true;
         this.displayName = user.displayName;
         this.userUid = user.uid;
       } else {
+        this.isSignedIn = false;
         console.log("未登入");
       }
     })
@@ -131,7 +136,6 @@ export default {
           .then(function (docRef) {
             console.log('成功', docRef.id);
           })
-
     },
   },
 
