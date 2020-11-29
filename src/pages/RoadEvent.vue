@@ -30,7 +30,7 @@
 
             <v-dialog max-width="440">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn icon v-bind="attrs" v-on="on">
+                <v-btn icon v-bind="attrs" v-on="on" v-show="isSignedIn">
                   <v-icon>mdi-dots-horizontal</v-icon>
                 </v-btn>
               </template>
@@ -42,12 +42,12 @@
                       <v-list-item-title>{{ item.title }}</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item> -->
-                  <v-list-item to="" dense>
+                  <v-list-item to="">
                     <v-list-item-content>
                       <v-list-item-title>編輯</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
-                  <v-list-item @click="delectSelectDoc(link.id)" dense>
+                  <v-list-item @click="delectSelectDoc(link.id)">
                     <v-list-item-content>
                       <v-list-item-title>刪除</v-list-item-title>
                     </v-list-item-content>
