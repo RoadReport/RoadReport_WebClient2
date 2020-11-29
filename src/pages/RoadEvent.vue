@@ -37,9 +37,19 @@
   
               <v-list nav>
                 <v-list-item-group color="primary">
-                  <v-list-item v-for="(item, i) in select" :key="i" :to="item.url" dense>
+                  <!-- <v-list-item v-for="(item, i) in select" :key="i" :to="item.url" dense>
                     <v-list-item-content>
                       <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item> -->
+                  <v-list-item to="" dense>
+                    <v-list-item-content>
+                      <v-list-item-title>編輯</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item @click="delectSelectDoc(link.id)" dense>
+                    <v-list-item-content>
+                      <v-list-item-title>刪除</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list-item-group>
@@ -50,7 +60,7 @@
           </v-list-item>
 
           <v-card-text class="body-1 text--primary pt-0 px-2">
-            {{ link.situation }}
+            {{ link.situation }}<br>{{link.id}} 
           </v-card-text>
 
           <div class="justify-center pl-2 pr-3">
@@ -131,7 +141,14 @@ export default {
       let date = new Date(time.seconds * 1000);
       return this.formatCompat(date);
     },
-
+    delectSelectDoc(docId){
+      let roadcode = localStorage.getItem("RoadCode");
+      db.collection("ReportAccident")
+          .doc(roadcode)
+          .collection("accidents")
+          .doc(docId)
+          .delete()
+    },
     asd(){
 console.log('aaa');
     },
