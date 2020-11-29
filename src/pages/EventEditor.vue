@@ -2,6 +2,9 @@
   <v-container>
     <v-row class="justify-center">
       <v-col>
+        <v-alert type="info">
+          暫不支援「地圖選位」和「圖片上傳」
+        </v-alert>
         <h5 class="mb-2">目前所在道路</h5>
         <v-text-field
             :label="currentRoadText"
@@ -38,7 +41,7 @@
             rows="5"
         ></v-textarea>
 
-        <h5 class="mb-2">圖片 - 選擇性 (暫時沒有功能)</h5>
+        <h5 class="mb-2">圖片 - 選擇性 (暫未開放)</h5>
         <v-file-input
             disabled
             accept="image/*"
