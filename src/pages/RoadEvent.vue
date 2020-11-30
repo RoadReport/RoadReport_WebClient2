@@ -31,7 +31,7 @@
             <v-menu :close-on-content-click="closeOnContentClick">
               <!-- <v-dialog max-width="440"> -->
               <template v-slot:activator="{ on, attrs }">
-                <v-btn icon v-bind="attrs" v-on="on" v-show="isSignedIn">
+                <v-btn icon v-bind="attrs" v-on="on" v-if="link.userUid === userUid">
                   <v-icon>mdi-dots-horizontal</v-icon>
                 </v-btn>
               </template>
@@ -74,7 +74,7 @@
           </v-list-item>
 
           <v-card-text class="body-1 text--primary pt-0 px-2">
-            {{ link.situation }}<br>{{link.id}} 
+            {{ link.situation }}<br>{{link.id}} {{link.userUid}} {{userUid}}
           </v-card-text>
 
           <div class="justify-center pl-2 pr-3">
@@ -100,9 +100,9 @@ export default {
   name: "RoadEvent",
   data: () => ({
     messages: [],
-    isSignedIn: false,
 
     closeOnContentClick: true,
+    userUid: '',
 
   }),
   methods: {
@@ -172,10 +172,8 @@ export default {
   mounted() {
     firebaseGlobal.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.isSignedIn = true;
-      } else {
-        this.isSignedIn = false;
-      }
+        this.userUid = user.uid;
+      } 
     })
   },
   firestore() {
