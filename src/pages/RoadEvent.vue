@@ -28,21 +28,22 @@
             <span class="body-1 text--primary ml-2">{{ link.locationText }}</span>
             <v-spacer/>
 
-            <v-dialog max-width="440">
+            <v-menu :close-on-content-click="closeOnContentClick">
+            <!-- <v-dialog max-width="440"> -->
               <template v-slot:activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on" v-show="isSignedIn">
                   <v-icon>mdi-dots-horizontal</v-icon>
                 </v-btn>
               </template>
   
-              <v-list nav>
-                <v-list-item-group color="primary">
+              <!-- <v-list nav>
+                <v-list-item-group color="primary"> -->
                   <!-- <v-list-item v-for="(item, i) in select" :key="i" :to="item.url" dense>
                     <v-list-item-content>
                       <v-list-item-title>{{ item.title }}</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item> -->
-                  <v-list-item to="">
+                  <!-- <v-list-item to="">
                     <v-list-item-content>
                       <v-list-item-title>編輯</v-list-item-title>
                     </v-list-item-content>
@@ -53,9 +54,19 @@
                     </v-list-item-content>
                   </v-list-item>
                 </v-list-item-group>
-              </v-list>
-            </v-dialog>
+              </v-list> -->
+            <!-- </v-dialog> -->
 
+            <v-list>
+              <v-list-item
+                v-for="(item, index) in items"
+                :key="index"
+                link
+              >
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
            
           </v-list-item>
 
@@ -88,16 +99,12 @@ export default {
     messages: [],
     isSignedIn: false,
 
-    select: [
-      {
-        title: "編輯",
-        url: "/",
-      },
-      {
-        title: "刪除",
-        url: "/",
-      },
+items: [
+      { title: '編輯' },
+      { title: '刪除' },
     ],
+    closeOnContentClick: true,
+
   }),
   methods: {
     convertSituationTypeToText(situationType) {
@@ -149,9 +156,7 @@ export default {
           .doc(docId)
           .delete()
     },
-    asd(){
-console.log('aaa');
-    },
+
     
   },
   beforeCreate() {
