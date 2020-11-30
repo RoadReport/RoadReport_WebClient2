@@ -102,17 +102,17 @@ export default {
   methods: {
     convertSituationTypeToText(situationType) {
       switch (situationType) {
-        case 0:
-          return "事故";
         case 1:
-          return "注意";
+          return "事故";
         case 2:
-          return "臨檢";
+          return "注意";
         case 3:
-          return "測速";
+          return "臨檢";
         case 4:
-          return "天氣";
+          return "測速";
         case 5:
+          return "天氣";
+        case 6:
           return "其他";
         default:
           return "其他";
@@ -120,15 +120,15 @@ export default {
     },
     detectSituationTypeToSetBorder(type) {
       switch (type) {
-        case 0:
         case 1:
-          return "bg_accident_type_2";
         case 2:
+          return "bg_accident_type_2";
         case 3:
-          return "bg_accident_type_1";
         case 4:
-          return "bg_accident_type_4";
+          return "bg_accident_type_1";
         case 5:
+          return "bg_accident_type_4";
+        case 6:
           return "bg_accident_type_5";
         default:
           return "bg_accident_type_5";
