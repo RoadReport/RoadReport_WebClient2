@@ -138,6 +138,7 @@ export default {
           })
           .then(function (docRef) {
             console.log('成功', docRef.id);
+            window.history.go(-1);
           })
     },
   },

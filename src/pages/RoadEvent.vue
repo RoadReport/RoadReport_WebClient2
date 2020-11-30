@@ -29,7 +29,7 @@
             <v-spacer/>
 
             <v-menu :close-on-content-click="closeOnContentClick">
-            <!-- <v-dialog max-width="440"> -->
+              <!-- <v-dialog max-width="440"> -->
               <template v-slot:activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on" v-show="isSignedIn">
                   <v-icon>mdi-dots-horizontal</v-icon>
@@ -55,18 +55,21 @@
                   </v-list-item>
                 </v-list-item-group>
               </v-list> -->
-            <!-- </v-dialog> -->
+              <!-- </v-dialog> -->
 
-            <v-list>
-              <v-list-item
-                v-for="(item, index) in items"
-                :key="index"
-                link
-              >
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+              <v-list>
+                <v-list-item link to="">
+                  <v-list-item-content>
+                    <v-list-item-title>編輯</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item link @click="delectSelectDoc(link.id)">
+                  <v-list-item-content>
+                    <v-list-item-title>刪除</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-menu>
            
           </v-list-item>
 
@@ -99,10 +102,6 @@ export default {
     messages: [],
     isSignedIn: false,
 
-items: [
-      { title: '編輯' },
-      { title: '刪除' },
-    ],
     closeOnContentClick: true,
 
   }),
@@ -154,7 +153,8 @@ items: [
           .doc(roadcode)
           .collection("accidents")
           .doc(docId)
-          .delete()
+          .delete();
+      console.log('成功刪除', docId);
     },
 
     
