@@ -109,17 +109,17 @@ export default {
       var s = this.situationType;
       var a;
       if (s == '事故') {
-        a = 0;
-      } else if (s == '注意') {
         a = 1;
-      } else if (s == '臨檢') {
+      } else if (s == '注意') {
         a = 2;
-      } else if (s == '測速') {
+      } else if (s == '臨檢') {
         a = 3;
-      } else if (s == '天氣') {
+      } else if (s == '測速') {
         a = 4;
-      } else if (s == '其他') {
+      } else if (s == '天氣') {
         a = 5;
+      } else if (s == '其他') {
+        a = 6;
       }
 
       console.log(this.situationType.text)
