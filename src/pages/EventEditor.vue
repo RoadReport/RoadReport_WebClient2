@@ -2,6 +2,11 @@
   <v-container>
     <v-row class="justify-center">
       <v-col>
+        <v-form
+      ref="form"
+      v-model="valid"
+      lazy-validation
+    >
         <v-alert type="info">
           暫不支援「地圖選位」和「圖片上傳」
         </v-alert>
@@ -18,6 +23,8 @@
             label="事故種類"
             solo
             :items="EventSelection"
+            :rules="[v => !!v || '請選擇事故種類']"
+            required
         ></v-select>
 
         <h5 class="mb-2">地點</h5>
@@ -28,6 +35,8 @@
             single-line
             solo
             append-icon="mdi-map-marker"
+            :rules="[v => !!v || '請輸入地點']"
+            required
         ></v-text-field>
 
         <h5 class="mb-2">狀況</h5>
@@ -39,6 +48,8 @@
             solo
             no-resize
             rows="5"
+            :rules="[v => !!v || '請輸入狀況']"
+            required
         ></v-textarea>
 
         <h5 class="mb-2">圖片 - 選擇性 (暫未開放)</h5>
@@ -53,6 +64,7 @@
           <v-icon left>mdi-send</v-icon>
           送出
         </v-btn>
+        </v-form>
       </v-col>
     </v-row>
   </v-container>
@@ -70,20 +82,22 @@ export default {
   data: () => ({
     EventSelection: ['事故', '注意', '臨檢', '測速', '天氣', '其他'],
     EventSelections: [
-      { text: '事故', value: 0 },
-      { text: '注意', value: 1 },
-      { text: '臨檢', value: 2 },
-      { text: '測速', value: 3 },
-      { text: '天氣', value: 4 },
-      { text: '其他', value: 5 },
+      { text: '事故', value: 1 },
+      { text: '注意', value: 2 },
+      { text: '臨檢', value: 3 },
+      { text: '測速', value: 4 },
+      { text: '天氣', value: 5 },
+      { text: '其他', value: 6 },
     ],
+
+    value: true,
 
     currentRoadText: getCurrRoadName(),
 
     currentRoadCode: getCurrentRoadCode(),
     displayName: '',
     userUid: '',
-    situationType: { text: '未知錯誤', value: -1 },
+    situationType: '',
     locationText: '',
     situation: '',
     imageUrl: '',
@@ -123,7 +137,10 @@ export default {
       }
 
       console.log(this.situationType.text)
-      db.collection('ReportAccident')
+
+      if(this.locationText != '' && this.situation != '' && this.situationType != '')
+      {
+        db.collection('ReportAccident')
           .doc(this.currentRoadCode)
           .collection('accidents')
           .add({
@@ -140,6 +157,12 @@ export default {
             console.log('成功', docRef.id);
             window.history.go(-1);
           })
+      }
+      else
+      {
+        this.$refs.form.validate()
+      } 
+      
     },
   },
 
