@@ -100,6 +100,7 @@ export default {
   name: "RoadEvent",
   data: () => ({
     messages: [],
+    isSignedIn: false,
 
     closeOnContentClick: true,
     userUid: '',
@@ -172,8 +173,11 @@ export default {
   mounted() {
     firebaseGlobal.auth().onAuthStateChanged((user) => {
       if (user) {
+        this.isSignedIn = true;
         this.userUid = user.uid;
-      } 
+      } else {
+        this.isSignedIn = false;
+      }
     })
   },
   firestore() {
