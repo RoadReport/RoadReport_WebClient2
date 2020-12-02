@@ -31,7 +31,7 @@
             <v-menu :close-on-content-click="closeOnContentClick">
               <!-- <v-dialog max-width="440"> -->
               <template v-slot:activator="{ on, attrs }">
-                <v-btn icon v-bind="attrs" v-on="on" v-if="link.userUid === userUid">
+                <v-btn icon v-bind="attrs" v-on="on" v-show="link.userUid === userUid">
                   <v-icon>mdi-dots-horizontal</v-icon>
                 </v-btn>
               </template>
