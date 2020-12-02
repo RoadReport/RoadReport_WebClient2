@@ -29,7 +29,6 @@
           <h5 class="mb-2">地點</h5>
           <v-text-field
               v-model="locationText"
-              :value="locationText"
               label="明顯地標或公里數"
               single-line
               solo
@@ -41,7 +40,6 @@
           <h5 class="mb-2">狀況</h5>
           <v-textarea
               v-model="situation"
-              :value="situation"
               label="簡短描述你眼前發生之狀況"
               single-line
               solo
@@ -162,28 +160,7 @@ export default {
             console.log('123', docRef.data().imageUrl);
             console.log('1aaaaaa', self.locationText);
           })
-          
-          var Q = self.situationType;
-          var T;
-          if (Q == 1) {
-            T = '事故';
-          } else if (Q == 2) {
-            T = '注意';
-          } else if (Q == 3) {
-            T = '臨檢';
-          } else if (Q == 4) {
-            T = '測速';
-          } else if (Q == 5) {
-            T = '天氣';
-          } else if (Q == 6) {
-            T = '其他';
-          }
-
-          this.situationType = T;
-          this.locationText = self.locationText;
-          this.locationGeoPoint = self.locationGeoPoint;
-          this.situation = self.situation;
-          this.imageUrl = self.imageUrl;
+        
 
       }
       else
