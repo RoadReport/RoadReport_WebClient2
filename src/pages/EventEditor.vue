@@ -104,7 +104,16 @@ export default {
 
     isSignedIn: false,
   }),
-
+  beforeCreate() {
+    if (localStorage.getItem("RoadCode") == null) {
+      console.log("You fucking donkey!");
+      this.$router.push("roadselect");
+      console.log(
+          "%c ",
+          "font-size:800px; background:url(https://i.pinimg.com/originals/ad/fa/0c/adfa0c865a9312afea03150e1fb1cfbd.gif) no-repeat;"
+      );
+    }
+  },
   mounted: function () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {

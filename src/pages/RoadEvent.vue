@@ -60,7 +60,7 @@
               <v-list>
                 <v-list-item link to="">
                   <v-list-item-content>
-                    <v-list-item-title>編輯</v-list-item-title>
+                    <v-list-item-title link @click="editSelectDoc(link.id)">編輯</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item link @click="delectSelectDoc(link.id)">
@@ -147,6 +147,9 @@ export default {
     convertTimestamp(time) {
       let date = new Date(time.seconds * 1000);
       return this.formatCompat(date);
+    },
+    editSelectDoc(docId) {
+      this.$router.push({ path: 'eventeditor', query: { editMode: true, docId: docId } })
     },
     delectSelectDoc(docId){
       let roadcode = localStorage.getItem("RoadCode");
