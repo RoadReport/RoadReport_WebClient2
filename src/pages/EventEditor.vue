@@ -3,8 +3,8 @@
     <v-row class="justify-center">
       <v-col>
         <v-form
-          ref="form"
-          lazy-validation
+            ref="form"
+            lazy-validation
         >
           <v-alert type="info">
             暫不支援「地圖選位」和「圖片上傳」
@@ -83,12 +83,12 @@ export default {
   data: () => ({
     EventSelection: ['事故', '注意', '臨檢', '測速', '天氣', '其他'],
     EventSelections: [
-      { text: '事故', value: 1 },
-      { text: '注意', value: 2 },
-      { text: '臨檢', value: 3 },
-      { text: '測速', value: 4 },
-      { text: '天氣', value: 5 },
-      { text: '其他', value: 6 },
+      {text: '事故', value: 1},
+      {text: '注意', value: 2},
+      {text: '臨檢', value: 3},
+      {text: '測速', value: 4},
+      {text: '天氣', value: 5},
+      {text: '其他', value: 6},
     ],
 
     value: true,
@@ -119,11 +119,10 @@ export default {
   mounted: function () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        if(this.$route.query.editMode != 'true')
-        {
+        if (this.$route.query.editMode != 'true') {
           this.isSignedIn = true;
         }
-        
+
         this.displayName = user.displayName;
         this.userUid = user.uid;
       } else {
@@ -134,12 +133,11 @@ export default {
   },
 
   firestore() {
-      if(this.$route.query.editMode === 'true')
-      {
-        this.isSignedIn = false;
-        this.isSignedIna = true;
+    if (this.$route.query.editMode === 'true') {
+      this.isSignedIn = false;
+      this.isSignedIna = true;
 
-        db.collection('ReportAccident')
+      db.collection('ReportAccident')
           .doc(this.currentRoadCode)
           .collection('accidents')
           .doc(this.$route.query.docId)
@@ -160,14 +158,12 @@ export default {
             console.log('123', docRef.data().imageUrl);
             console.log('1aaaaaa', self.locationText);
           })
-        
 
-      }
-      else
-      {
-        this.isSignedIn = true;
-        this.isSignedIna = false;
-      }
+
+    } else {
+      this.isSignedIn = true;
+      this.isSignedIna = false;
+    }
   },
 
   methods: {
@@ -190,35 +186,31 @@ export default {
 
       console.log(this.situationType.text)
 
-      if(this.locationText != '' && this.situation != '' && this.situationType != '')
-      {
+      if (this.locationText != '' && this.situation != '' && this.situationType != '') {
         db.collection('ReportAccident')
-          .doc(this.currentRoadCode)
-          .collection('accidents')
-          .add({
-            userName: this.displayName,
-            userUid: this.userUid,
-            time: firebase.firestore.FieldValue.serverTimestamp(),
-            situationType: Number(a),
-            locationText: this.locationText,
-            locationGeoPoint: new firebase.firestore.GeoPoint(0, 0),
-            situation: this.situation,
-            imageUrl: '',
-          })
-          .then(function (docRef) {
-            console.log('成功', docRef.id);
-            window.history.go(-1);
-          })
-      }
-      else
-      {
+            .doc(this.currentRoadCode)
+            .collection('accidents')
+            .add({
+              userName: this.displayName,
+              userUid: this.userUid,
+              time: firebase.firestore.FieldValue.serverTimestamp(),
+              situationType: Number(a),
+              locationText: this.locationText,
+              locationGeoPoint: new firebase.firestore.GeoPoint(0, 0),
+              situation: this.situation,
+              imageUrl: '',
+            })
+            .then(function (docRef) {
+              console.log('成功', docRef.id);
+              window.history.go(-1);
+            })
+      } else {
         this.$refs.form.validate()
-      } 
-      
+      }
+
     },
 
-    modify()
-    {
+    modify() {
       var s = this.situationType;
       var a;
       if (s == '事故') {
