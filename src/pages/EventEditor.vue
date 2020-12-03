@@ -57,7 +57,7 @@
               prepend-icon="mdi-camera"
           ></v-file-input>
 
-          <v-btn color="primary" elevation="4" block @click="submit">
+          <v-btn color="primary" elevation="4" block v-show="isSignedIn" @click="submit">
             <v-icon left>mdi-send</v-icon>
             送出
           </v-btn>
@@ -125,6 +125,7 @@ export default {
       } else {
         this.isSignedIn = false;
         console.log("未登入");
+        window.history.go(-1);
       }
     })
   },
