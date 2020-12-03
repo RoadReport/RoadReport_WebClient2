@@ -113,7 +113,6 @@ export default {
     }
   },
   mounted: function () {
-    console.log("I am here");
     // Check is edit mode or not.
     if (this.$route.query.editMode === "true") {
       this.isEditMode = true
@@ -133,6 +132,7 @@ export default {
   firestore() {
     // If is edit mode, get doc from firestore once.
     if (this.$route.query.editMode === "true") {
+      console.log("Is edit mode!")
       db.collection('ReportAccident')
           .doc(this.currentRoadCode)
           .collection('accidents')
@@ -140,7 +140,6 @@ export default {
           .get()
           .then(snapshot  => {
             const document = snapshot.data()
-            console.log('Is edit mode! Get doc from firestore!', document);
 
             // TODO(Find a better way to deal this shit)
             let tempSituationType = "其他"
@@ -167,10 +166,6 @@ export default {
             this.situationType = tempSituationType
             this.locationText = document.locationText
             this.situation = document.situation
-
-            console.log('situationType: ', document.situationType);
-            console.log('locationText: ', document.locationText);
-            console.log('situation: ', document.situation);
           })
     }
   },
