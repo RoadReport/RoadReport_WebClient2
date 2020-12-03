@@ -74,7 +74,7 @@
           </v-list-item>
 
           <v-card-text class="body-1 text--primary pt-0 px-2">
-            {{ link.situation }}<br>{{link.id}} {{link.userUid}} {{userUid}}
+            {{ link.situation }}<br>
           </v-card-text>
 
           <div class="justify-center pl-2 pr-3">
