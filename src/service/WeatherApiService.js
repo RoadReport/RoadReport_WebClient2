@@ -52,7 +52,6 @@ async function fetchWeatherData(stationName, stationID) {
     }
   }
 
-
   return {
     locationName: stationName,
     stationId: stationID,
