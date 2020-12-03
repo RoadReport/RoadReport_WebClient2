@@ -143,6 +143,13 @@ export default {
         artist: "位於台南高雄交界",
         roadcode: 1,
       },
+      {
+        color: "#43A047",
+        src: "https://image.flaticon.com/icons/svg/726/726498.svg",
+        title: "阿婆灣",
+        artist: "位於嘉義中埔鄉",
+        roadcode: 2,
+      },
     ],
     dialogNavigation: [
       {
