@@ -57,13 +57,9 @@
               prepend-icon="mdi-camera"
           ></v-file-input>
 
-          <v-btn color="primary" elevation="4" block v-show="isSignedIn" @click="add">
+          <v-btn color="primary" elevation="4" block @click="submit">
             <v-icon left>mdi-send</v-icon>
             送出
-          </v-btn>
-          <v-btn color="primary" elevation="4" block v-show="isSignedIna" @click="modify">
-            <v-icon left>mdi-send</v-icon>
-            修改
           </v-btn>
         </v-form>
       </v-col>
@@ -93,6 +89,9 @@ export default {
 
     value: true,
 
+    isSignedIn: false,
+    isEditMode: false,
+
     currentRoadText: getCurrRoadName(),
 
     currentRoadCode: getCurrentRoadCode(),
@@ -102,9 +101,6 @@ export default {
     locationText: '',
     situation: '',
     imageUrl: '',
-
-    isSignedIn: false,
-    isSignedIna: false,
   }),
   beforeCreate() {
     if (localStorage.getItem("RoadCode") == null) {
@@ -117,12 +113,14 @@ export default {
     }
   },
   mounted: function () {
+    console.log("I am here");
+    // Check is edit mode or not.
+    if (this.$route.query.editMode === "true") {
+      this.isEditMode = true
+    }
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        if (this.$route.query.editMode != 'true') {
-          this.isSignedIn = true;
-        }
-
+        this.isSignedIn = true;
         this.displayName = user.displayName;
         this.userUid = user.uid;
       } else {
@@ -133,41 +131,53 @@ export default {
   },
 
   firestore() {
-    if (this.$route.query.editMode === 'true') {
-      this.isSignedIn = false;
-      this.isSignedIna = true;
-
+    // If is edit mode, get doc from firestore once.
+    if (this.$route.query.editMode === "true") {
       db.collection('ReportAccident')
           .doc(this.currentRoadCode)
           .collection('accidents')
           .doc(this.$route.query.docId)
           .get()
-          .then(function (docRef) {
-            console.log('123', docRef.data());
+          .then(snapshot  => {
+            const document = snapshot.data()
+            console.log('Is edit mode! Get doc from firestore!', document);
 
-            self.situationType = docRef.data().situationType;
-            self.locationText = docRef.data().locationText;
-            self.locationGeoPoint = docRef.data().locationGeoPoint;
-            self.situation = docRef.data().situation;
-            self.imageUrl = docRef.data().imageUrl;
+            // TODO(Find a better way to deal this shit)
+            let tempSituationType = "其他"
+            switch (document.situationType) {
+              case 1:
+                tempSituationType = "事故"
+                break
+              case 2:
+                tempSituationType = "注意"
+                break
+              case 3:
+                tempSituationType = "臨檢"
+                break
+              case 4:
+                tempSituationType = "測速"
+                break
+              case 5:
+                tempSituationType = "天氣"
+                break
+              case 6:
+                tempSituationType = "其他"
+                break
+            }
+            this.situationType = tempSituationType
+            this.locationText = document.locationText
+            this.situation = document.situation
 
-            console.log('123', docRef.data().situationType);
-            console.log('123', docRef.data().locationText);
-            console.log('123', docRef.data().locationGeoPoint);
-            console.log('123', docRef.data().situation);
-            console.log('123', docRef.data().imageUrl);
-            console.log('1aaaaaa', self.locationText);
+            console.log('situationType: ', document.situationType);
+            console.log('locationText: ', document.locationText);
+            console.log('situation: ', document.situation);
           })
-
-
-    } else {
-      this.isSignedIn = true;
-      this.isSignedIna = false;
     }
   },
 
   methods: {
-    add() {
+    submit() {
+      // TODO(Find a better way to deal this shit)
       var s = this.situationType;
       var a;
       if (s == '事故') {
@@ -184,68 +194,48 @@ export default {
         a = 6;
       }
 
-      console.log(this.situationType.text)
-
-      if (this.locationText != '' && this.situation != '' && this.situationType != '') {
+      if (this.isEditMode) {
+        // Edit event.
         db.collection('ReportAccident')
             .doc(this.currentRoadCode)
             .collection('accidents')
-            .add({
-              userName: this.displayName,
-              userUid: this.userUid,
-              time: firebase.firestore.FieldValue.serverTimestamp(),
+            .doc(this.$route.query.docId)
+            .update({
               situationType: Number(a),
               locationText: this.locationText,
-              locationGeoPoint: new firebase.firestore.GeoPoint(0, 0),
               situation: this.situation,
-              imageUrl: '',
             })
-            .then(function (docRef) {
-              console.log('成功', docRef.id);
+            .then(function () {
+              console.log('修改成功');
               window.history.go(-1);
             })
+
       } else {
-        this.$refs.form.validate()
+        // Add event.
+        if (this.locationText != '' && this.situation != '' && this.situationType != '') {
+          db.collection('ReportAccident')
+              .doc(this.currentRoadCode)
+              .collection('accidents')
+              .add({
+                userName: this.displayName,
+                userUid: this.userUid,
+                time: firebase.firestore.FieldValue.serverTimestamp(),
+                situationType: Number(a),
+                locationText: this.locationText,
+                locationGeoPoint: new firebase.firestore.GeoPoint(0, 0),
+                situation: this.situation,
+                imageUrl: '',
+              })
+              .then(function (docRef) {
+                console.log('新增成功', docRef.id);
+                window.history.go(-1);
+              })
+        } else {
+          this.$refs.form.validate()
+        }
+
       }
-
     },
-
-    modify() {
-      var s = this.situationType;
-      var a;
-      if (s == '事故') {
-        a = 1;
-      } else if (s == '注意') {
-        a = 2;
-      } else if (s == '臨檢') {
-        a = 3;
-      } else if (s == '測速') {
-        a = 4;
-      } else if (s == '天氣') {
-        a = 5;
-      } else if (s == '其他') {
-        a = 6;
-      }
-
-      console.log(this.$route.query.docId)
-
-      db.collection('ReportAccident')
-          .doc(this.currentRoadCode)
-          .collection('accidents')
-          .doc(this.$route.query.docId)
-          .update({
-            situationType: Number(a),
-            locationText: this.locationText,
-            locationGeoPoint: new firebase.firestore.GeoPoint(0, 0),
-            situation: this.situation,
-            imageUrl: '',
-          })
-          .then(function () {
-            console.log('修改成功');
-            window.history.go(-1);
-          })
-    },
-
   },
 
 };
