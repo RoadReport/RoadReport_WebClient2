@@ -1,21 +1,23 @@
 import Vue from "vue";
 import App from "./App.vue";
-import vuetify from "./plugins/vuetify";
-import { firestorePlugin } from "vuefire";
 import router from "./router";
+import vuetify from "./plugins/vuetify";
+import store from "./store";
+import "./registerServiceWorker";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import { firestorePlugin } from "vuefire";
 
+Vue.use(VueAxios, axios);
 Vue.use(firestorePlugin);
 
-// 1. Use plugin.
-// This installs <router-view> and <router-link>,
-// and injects $router and $route to all router-enabled child components
-// Vue.use(VueRouter)
-
 Vue.config.productionTip = false;
+Vue.config.devtools = false
 
 new Vue({
   el: "#app",
   router,
+  store,
 
   components: {
     App,

@@ -1,7 +1,10 @@
 import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/analytics";
+import "firebase/remote-config";
 import "firebase/firestore";
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDc9uJ-RzpHBkpXWSedJqa8UuzbidMeK5E",
   authDomain: "roadreport-24.firebaseapp.com",
   databaseURL: "https://roadreport-24.firebaseio.com",
@@ -12,8 +15,7 @@ var firebaseConfig = {
   measurementId: "G-L7H3SPSQ73",
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-firebase.firestore().settings({ timestampsInSnapshots: true });
-
-export const db = firebase.firestore();
+export const firebaseGlobal = firebase;

@@ -5,14 +5,14 @@
         <v-list>
           <v-list-item>
             <v-list-item-avatar>
-              <v-img src="https://randomuser.me/api/portraits/men/78.jpg" />
+              <v-img :src="photoURL"/>
             </v-list-item-avatar>
           </v-list-item>
 
           <v-list-item to="/login" link>
             <v-list-item-content>
-              <v-list-item-title class="title">未登入</v-list-item-title>
-              <v-list-item-subtitle>好平台，不登入嗎?</v-list-item-subtitle>
+              <v-list-item-title class="title">{{ displayName }}</v-list-item-title>
+              <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
             </v-list-item-content>
             <v-icon>mdi-chevron-right</v-icon>
           </v-list-item>
@@ -22,10 +22,10 @@
 
         <v-list dense nav>
           <v-list-item
-            v-for="item in section1"
-            :key="item.title"
-            :to="item.url"
-            link
+              v-for="item in section1"
+              :key="item.title"
+              :to="item.url"
+              link
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -41,10 +41,10 @@
 
         <v-list dense nav>
           <v-list-item
-            v-for="item in section2"
-            :key="item.title"
-            :to="item.url"
-            link
+              v-for="item in section2"
+              :key="item.title"
+              :to="item.url"
+              link
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -60,10 +60,10 @@
 
         <v-list dense nav>
           <v-list-item
-            v-for="item in section3"
-            :key="item.title"
-            :to="item.url"
-            link
+              v-for="item in section3"
+              :key="item.title"
+              :to="item.url"
+              link
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -74,77 +74,37 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <template v-slot:append>
-          <div class="pa-2">
-            <v-btn block>
-              Logout
-            </v-btn>
-          </div>
-        </template>
+        
       </v-navigation-drawer>
 
-      <v-app-bar app color="primary" dark>
+      <v-app-bar app class="mb-2" color="white" light>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>道路名稱</v-toolbar-title>
         <div class="d-flex align-center">
           <v-img
-            alt="Vuetify Logo"
-            class="shrink mr-2"
-            contain
-            src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-            transition="scale-transition"
-            width="40"
-          />
-
-          <v-img
-            alt="Vuetify Name"
-            class="shrink mt-1 hidden-sm-and-down"
-            contain
-            min-width="100"
-            src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-            width="100"
+              alt="Vuetify Logo"
+              class="shrink mr-2"
+              contain
+              src="../assets/bollard_forRound.png"
+              transition="scale-transition"
+              width="40"
           />
         </div>
-
+        <v-toolbar-title>{{ toolbarTitle }}</v-toolbar-title>
         <v-spacer />
-
-        <v-dialog v-model="dialog" width="500">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn text v-bind="attrs" v-on="on">
-              <span class="mr-2">切換道路</span>
-              <v-icon>mdi-compare-horizontal</v-icon>
-            </v-btn>
-          </template>
-
-          <v-card>
-            <v-card-title class="headline lighten-2">
-              切換道路
-            </v-card-title>
-            <v-list nav dense>
-              <v-list-item-group color="primary">
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon>mdi-car-info</v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>台 24</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-card>
-        </v-dialog>
       </v-app-bar>
 
       <v-main>
         <!-- <RoadEvent /> -->
-        <router-view />
+        <router-view/>
       </v-main>
     </div>
   </v-app>
 </template>
 <script>
+
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 export default {
   name: "Default",
 
@@ -175,7 +135,7 @@ export default {
         url: "weather",
       },
       {
-        title: "影像",
+        title: "即時影像",
         icon: "mdi-camera",
         url: "livecam",
       },
@@ -192,6 +152,42 @@ export default {
         url: "about",
       },
     ],
+
+    photoURL: '',
+    displayName: '',
+    email: '',
   }),
+  computed: {
+    toolbarTitle() {
+      switch (this.$route.path) {
+        case "/roadselect":
+          return "看路"
+        case "/roadevent":
+          return "路況"
+        case "/weather":
+          return "天氣"
+        case "/livecam":
+          return "即時影像"
+        default:
+          return ""
+      }
+    },
+  },
+  beforeCreate: function () {
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.photoURL = user.photoURL;
+        this.displayName = user.displayName;
+        this.email = user.email;
+        console.log(user);
+      } else {
+        this.photoURL = "https://www.flaticon.com/svg/static/icons/svg/14/14660.svg";
+        this.displayName = "未登入";
+        this.email = "好平台，不登入嗎?";
+      }
+    })
+
+  },
 };
 </script>
