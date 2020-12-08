@@ -15,6 +15,19 @@
       </v-btn>
     </v-fab-transition>
     <v-row>
+      <v-col cols="12" justify-center>
+        <div
+          class="text-center" 
+          v-show="messages.length == 0" 
+          elevation="0">
+          <v-img 
+            class="mb-4 mx-auto"
+            src="https://www.flaticon.com/svg/static/icons/svg/869/869869.svg" 
+            height="100" 
+            width="100" />
+          <p>風和日麗 :D</p>
+        </div>
+      </v-col>
       <v-col class="pb-1" cols="12" v-for="(link, i) in messages" :key="i">
         <v-card
             class="justify-center mx-auto"
