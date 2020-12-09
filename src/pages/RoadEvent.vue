@@ -86,7 +86,7 @@
            
           </v-list-item>
 
-          <v-card-text class="body-1 text--primary pt-0 px-2">
+          <v-card-text class="body-1 text--primary pt-0 px-2" style="white-space: pre-line;">
             {{ link.situation }}<br>
           </v-card-text>
 
