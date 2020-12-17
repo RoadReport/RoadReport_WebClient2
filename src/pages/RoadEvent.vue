@@ -134,6 +134,10 @@ export default {
           return "天氣";
         case 6:
           return "其他";
+        case 7:
+          return "坍方";
+        case 8:
+          return "落石";
         default:
           return "其他";
       }
@@ -145,6 +149,8 @@ export default {
           return "bg_accident_type_2";
         case 3:
         case 4:
+        case 7:
+        case 8:
           return "bg_accident_type_1";
         case 5:
           return "bg_accident_type_4";

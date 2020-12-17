@@ -77,7 +77,7 @@ export default {
   name: "EventEditor",
 
   data: () => ({
-    EventSelection: ['事故', '注意', '臨檢', '測速', '天氣', '其他'],
+    EventSelection: ['事故', '注意', '臨檢', '測速', '天氣', '其他', '坍方', '落石'],
     EventSelections: [
       {text: '事故', value: 1},
       {text: '注意', value: 2},
@@ -85,6 +85,8 @@ export default {
       {text: '測速', value: 4},
       {text: '天氣', value: 5},
       {text: '其他', value: 6},
+      {text: '坍方', value: 7},
+      {text: '落石', value: 8},
     ],
 
     value: true,
@@ -163,6 +165,12 @@ export default {
               case 6:
                 tempSituationType = "其他"
                 break
+              case 7:
+                tempSituationType = "坍方"
+                break
+              case 8:
+                tempSituationType = "落石"
+                break
             }
             this.situationType = tempSituationType
             this.locationText = document.locationText
@@ -188,6 +196,10 @@ export default {
         a = 5;
       } else if (s == '其他') {
         a = 6;
+      } else if (s == '坍方') {
+        a = 7;
+      } else if (s == '落石') {
+        a = 8;
       }
 
       if (this.isEditMode) {
